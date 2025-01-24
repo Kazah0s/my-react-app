@@ -28,6 +28,10 @@ module.exports = {
         test: /\.css$/,  // Добавляем поддержку для CSS файлов
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader','sass-loader']
+      }
     ],
   },
   plugins: [
