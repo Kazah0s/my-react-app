@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/app/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -15,7 +15,7 @@ module.exports = {
     hot: true,  // Для перезагрузки при изменениях
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],  // Поддержка расширений для импорта
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],  // Поддержка расширений для импорта
   },
   module: {
     rules: [
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader','sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       }
     ],
   },
