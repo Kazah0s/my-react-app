@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import rootSaga from './sagas'
+import rootSaga from './rootSaga'
 import createSagaMiddleware from 'redux-saga'
-import counterReducer from './counterSlice'
+import counterReducer from './rootReducer'
 
 export const store = configureStore({
   reducer: {

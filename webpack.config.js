@@ -15,7 +15,7 @@ module.exports = {
     hot: true,  // Для перезагрузки при изменениях
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],  // Поддержка расширений для импорта
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],  // Поддержка расширений для импорта
   },
   module: {
     rules: [
