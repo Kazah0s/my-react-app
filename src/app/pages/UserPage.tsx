@@ -5,7 +5,7 @@ import { RootState } from '../Store/store';
 
 const UserPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state: RootState) => state.user);
+  const { data, loading, error } = useSelector((state: RootState) => state.counter.user);
 
   useEffect(() => {
     dispatch(fetchUserRequest());

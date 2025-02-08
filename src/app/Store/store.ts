@@ -3,13 +3,16 @@ import rootSaga from './rootSaga'
 import createSagaMiddleware from 'redux-saga'
 import counterReducer from './rootReducer'
 
+const sagaMiddleware = createSagaMiddleware()
+
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
 
-const sagaMiddleware = createSagaMiddleware()
 sagaMiddleware.run(rootSaga)
 
 
