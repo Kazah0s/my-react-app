@@ -24,13 +24,11 @@
     "style-loader": "^4.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.13.2",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "html-webpack-plugin": "^5.6.3",
-<<<<<<< HEAD
-=======
     "sass-loader": "^16.0.4",
->>>>>>> 08c08570ff38da3501e1efa9e049cc8ec2f39802
     "source-map-loader": "^5.0.0",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3",

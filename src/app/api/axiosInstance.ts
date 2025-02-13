@@ -1,5 +1,10 @@
-// src/api/config.ts
 import axios from 'axios';
+
+declare let process : {
+  env: {
+    REACT_APP_API_BASE_URL: string;
+  }
+};  
 
 // Базовый URL из переменной окружения
 const baseURL = process.env.REACT_APP_API_BASE_URL;

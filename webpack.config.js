@@ -39,7 +39,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',  // Шаблон для HTML
     }),
-    new Dotenv(),ыы
   ],
   
 };
