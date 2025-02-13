@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserRequest } from '../Store/slices/userSlice';
 import { RootState } from '../Store/store';
 
-const UserPage: React.FC = () => {
+const userPage = () => {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state: RootState) => state.counter.user);
 
@@ -12,14 +12,14 @@ const UserPage: React.FC = () => {
   }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>Error: {error}</div>;                                                                                                    
 
   return (
     <div>
-      <h1>User Page</h1>
+      <h1>user Page</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };
 
-export default UserPage;
+export default userPage;

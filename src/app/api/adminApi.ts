@@ -1,7 +1,9 @@
+import { apiInstance } from "./axiosInstance";
+
 export const fetchAdminApi = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users/2');
-    if (!response.ok) {
+  const response = await apiInstance.get('/users/2');
+    if (!response.data) {
       throw new Error('Failed to fetch admin');
     }
-    return response.json();
+    return response.data;
   };  
