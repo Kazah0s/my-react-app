@@ -11,6 +11,6 @@
     "noEmit": false,
     // "allowImportingTsExtensions": true,
   },
-  "include": ["src"],
+  "include": ["src", "babel.config.ts"],
   "exclude": ["node_modules"]
 }
