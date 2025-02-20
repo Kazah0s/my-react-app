@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // Определяем функциональный компонент ModalFormComponent с типами
-const Аdvertisement = () => {
+const advertisement = () => {
   // Состояние для управления видимостью модального окна
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -36,7 +36,7 @@ const Аdvertisement = () => {
           <div >
             <h2>Введите тему и описание</h2>
             <form onSubmit={handleSubmit}>
-              <div >
+              <div>
                 <label htmlFor="theme">Тема:</label>
                 <input
                   type="text"
@@ -69,4 +69,4 @@ const Аdvertisement = () => {
 
 
 
-export default Аdvertisement;
+export default advertisement;

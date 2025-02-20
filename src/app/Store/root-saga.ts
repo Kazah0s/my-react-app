@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
-import { watchFetchUser } from './sagas/userSaga';
-import { watchFetchAdmin } from './sagas/adminSaga';
+import { watchFetchUser } from '../pages/RegAutPage/saga';
+import { watchFetchAdmin } from '../pages/mainPage/saga';
 
 export default function* rootSaga() {
   yield all([

@@ -12,7 +12,7 @@ const initialState: AdminState = {
   error: null,
 };
 
-const adminSlice = createSlice({
+export const {actions, reducer} = createSlice({
   name: 'admin',
   initialState,
   reducers: {
@@ -30,5 +30,5 @@ const adminSlice = createSlice({
   },
 });
 
-export const { fetchAdminRequest, fetchAdminSuccess, fetchAdminFailure } = adminSlice.actions;
-export default adminSlice.reducer;
+export const { fetchAdminRequest, fetchAdminSuccess, fetchAdminFailure } = {actions, reducer}.actions;
+// export default adminSlice.reducer;

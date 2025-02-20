@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { fetchUserSuccess, fetchUserFailure } from '../slices/userSlice';
+import { fetchUserSuccess, fetchUserFailure } from './slice';
 import { fetchUserApi } from '../../api/userApi';
 
 function* fetchUserSaga() {

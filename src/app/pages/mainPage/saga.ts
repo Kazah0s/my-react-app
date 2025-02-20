@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { fetchAdminSuccess, fetchAdminFailure } from '../slices/adminSlice';
+import { fetchAdminSuccess, fetchAdminFailure } from './slice';
 import { fetchAdminApi } from '../../api/adminApi';
 
 function* fetchAdminSaga() {

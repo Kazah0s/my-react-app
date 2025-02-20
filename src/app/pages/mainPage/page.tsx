@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserRequest } from '../Store/slices/userSlice';
-import { RootState } from '../Store/store';
+import { fetchAdminRequest } from './slice';
+import { RootState } from '../../Store/store';
 
-const userPage = () => {
+const mainPage = () => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state: RootState) => state.counter.user);
+  const { data, loading, error } = useSelector((state: RootState) => state.counter.admin);
 
   useEffect(() => {
-    dispatch(fetchUserRequest());
+    dispatch(fetchAdminRequest());
   }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
@@ -16,10 +16,10 @@ const userPage = () => {
 
   return (
     <div>
-      <h1>user Page</h1>
+      <h1>Admin Page</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };
 
-export default userPage;
+export default mainPage;

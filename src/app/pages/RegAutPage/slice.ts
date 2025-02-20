@@ -12,7 +12,7 @@ const initialState: UserState = {
   error: null,
 };
 
-const userSlice = createSlice({
+export const {actions, reducer} = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -30,5 +30,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { fetchUserRequest, fetchUserSuccess, fetchUserFailure } = userSlice.actions;
-export default userSlice.reducer;
+export const { fetchUserRequest, fetchUserSuccess, fetchUserFailure } = {actions, reducer}.actions;
+// export default userSlice.reducer;
