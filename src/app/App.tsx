@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router';
 // import {regAutPage} from './pages/RegAutPage';
 // import {mainPage} from './pages/mainPage'; 
-import Registration from './pages/RegAutPage/features/input/Registration'
+import Registration from './pages/RegAutPage/features/register/Registration'
 
 
 export const App = () => {
