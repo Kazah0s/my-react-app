@@ -30,5 +30,5 @@ export const {actions, reducer} = createSlice({
   },
 });
 
-export const { fetchAdminRequest, fetchAdminSuccess, fetchAdminFailure } = {actions, reducer}.actions;
+export const { fetchAdminRequest, fetchAdminSuccess, fetchAdminFailure } = actions;
 // export default adminSlice.reducer;

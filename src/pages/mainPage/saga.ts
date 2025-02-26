@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { fetchUserSuccess, fetchUserFailure } from './slice';
-import { fetchUserApi } from '../../api/userApi';
+import { fetchUserSuccess, fetchUserFailure, fetchUserRequest} from './slice';
+import { fetchUserApi } from '../../app/api/userApi';
 
 function* fetchUserSaga() {
   try {
@@ -12,5 +12,5 @@ function* fetchUserSaga() {
 }
 
 export function* watchFetchUser() {
-  yield takeEvery('user/fetchUserRequest', fetchUserSaga);
+  yield takeEvery(fetchUserRequest, fetchUserSaga);
 }

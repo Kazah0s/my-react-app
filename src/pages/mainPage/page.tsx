@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserRequest } from './slice';
-import { RootState } from '../../Store/store';
+import { RootState } from '../../app/Store/store';
 
 const regAutPage = () => {
   const dispatch = useDispatch();

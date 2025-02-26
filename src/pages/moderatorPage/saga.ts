@@ -1,6 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { fetchAdminSuccess, fetchAdminFailure } from './slice';
-import { fetchAdminApi } from '../../api/adminApi';
+import { fetchAdminSuccess, fetchAdminFailure, fetchAdminRequest} from './slice';
+import { fetchAdminApi } from '../../app/api/adminApi';
+
 
 function* fetchAdminSaga() {
   try {
@@ -12,5 +13,5 @@ function* fetchAdminSaga() {
 }
 
 export function* watchFetchAdmin() {
-  yield takeEvery('admin/fetchAdminRequest', fetchAdminSaga);
+  yield takeEvery(fetchAdminRequest, fetchAdminSaga);
 }
