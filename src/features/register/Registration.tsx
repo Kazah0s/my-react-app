@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../app/Store/store';
+import { fetchRegisterRequest } from './slice';
+
 
 const Registration: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -7,7 +10,18 @@ const Registration: React.FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
+const dispatch = useDispatch();
+const data = useSelector((state: RootState) => state.register.data)
 
+  const handleButtonClick = () => {
+    const registerData = {
+      name: firstName,
+      fam: lastName,
+      login: login,
+      password: password
+    };
+    dispatch(fetchRegisterRequest(registerData));
+}
 
   return (
     <div>
@@ -49,7 +63,7 @@ const Registration: React.FC = () => {
             required
           />
         </div>
-        <button type="submit" disabled={status === 'loading'}>
+        <button onClick={handleButtonClick} type="submit" disabled={status === 'loading'}>
           {status === 'loading' ? 'Загрузка...' : 'Зарегистрироваться'}
         </button>
       </form>
