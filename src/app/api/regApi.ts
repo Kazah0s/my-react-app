@@ -2,13 +2,13 @@ import { apiInstance } from "./axiosInstance";
 
 export type RegisterData = {
     name: string,
-    fam: string,
+    surName: string,
     login: string,
     password: string
 } 
 
 export const fetchRegisterApi = async (regData:RegisterData) => {
-  const response = await apiInstance.post('/users/3', regData);
+  const response = await apiInstance.post('/users', regData);
     if (!response.data) {
       throw new Error('Failed to fetch admin');
     }

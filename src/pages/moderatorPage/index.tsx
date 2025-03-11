@@ -1,7 +1,7 @@
 import { } from 'dotenv'
-import mainPage from './page';
+import ModeratorPage from './page';
 import {watchFetchAdmin} from './saga'
 import {actions, reducer} from './slice'
 
 
-export {mainPage, watchFetchAdmin, actions, reducer}
+export {ModeratorPage, watchFetchAdmin, actions, reducer}

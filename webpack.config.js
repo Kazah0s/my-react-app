@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/app/index.tsx',
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -16,7 +16,7 @@ module.exports = {
     hot: true,  // Для перезагрузки при изменениях
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js'],  // Поддержка расширений для импорта
+    extensions: ['.tsx', '.ts', '.js'],  // Поддержка расширений для импорта
     fallback: {
       "process": require.resolve("process/browser")
     },

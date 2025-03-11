@@ -1,39 +1,34 @@
 import React, { useState } from 'react';
 
-// Определяем функциональный компонент ModalFormComponent с типами
-const advertisement = () => {
-  // Состояние для управления видимостью модального окна
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // Состояния для хранения значений полей формы
+const AdvButton = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  
   const [theme, setTheme] = useState<string>('');
   const [description, setDescription] = useState<string>('');
 
-  // Функция для обработки закрытия модального окна
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setTheme(''); // Очищаем поля формы при закрытии
+    setTheme(''); 
     setDescription('');
   };
 
-  // Функция для обработки отправки формы
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(`Тема: ${theme}\nОписание: ${description}`);
-    handleCloseModal(); // Закрываем модальное окно после отправки
+    // alert(`Тема: ${theme}\nОписание: ${description}`);
+    handleCloseModal(); 
   };
 
   return (
     <div >
-      {/* Кнопка для открытия модального окна */}
       <button onClick={() => setIsModalOpen(true)} >
-        Открыть форму
+        Написать объявление
       </button>
 
-      {/* Модальное окно */}
       {isModalOpen && (
-        <div >
-          <div >
+        <div>
+          <div>
             <h2>Введите тему и описание</h2>
             <form onSubmit={handleSubmit}>
               <div>
@@ -69,4 +64,4 @@ const advertisement = () => {
 
 
 
-export default advertisement;
+export default AdvButton;

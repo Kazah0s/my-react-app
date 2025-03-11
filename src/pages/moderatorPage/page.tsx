@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdminRequest } from './slice';
-import { RootState } from '../../app/Store/store';
+import { RootState } from '../../app/Store/store'; 
 
-const mainPage = () => {
+const ModeratorPage = () => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state: RootState) => state.counter.admin);
+  const { data, loading, error } = useSelector((state: RootState) => state.admin);
 
   useEffect(() => {
     dispatch(fetchAdminRequest());
@@ -16,10 +16,10 @@ const mainPage = () => {
 
   return (
     <div>
-      <h1>Admin Page</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <h1>Страница модерации</h1>
+  
     </div>
   );
 };
 
-export default mainPage;
+export default ModeratorPage;
