@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRegisterRequest } from './slice';
 import { RootState } from '../../app/Store/store';
@@ -7,9 +7,7 @@ import { RootState } from '../../app/Store/store';
 const Registration: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [firstName, setFirstName] = useState('');
-  const [surName, setSurName] = useState('');
-  const [login, setLogin] = useState('');
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
@@ -17,14 +15,33 @@ const Registration: React.FC = () => {
 
   const handleButtonClick = () => {
     const registerData = {
-      name: firstName,
-      surName: surName,
-      login: login,
+      username: username,
       password: password
     };
     dispatch(fetchRegisterRequest(registerData));
     setIsModalOpen(false);
   }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      handleCloseModal();
+    }
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen]);
+
 
   return (
     <div>
@@ -38,29 +55,11 @@ const Registration: React.FC = () => {
             <h2>Регистрация</h2>
             <form>
               <div className='form-group'>
-                <label>Имя:</label>
-                <input
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className='form-group'>
-                <label>Фамилия:</label>
-                <input
-                  type="text"
-                  value={surName}
-                  onChange={(e) => setSurName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className='form-group'>
                 <label>Логин:</label>
                 <input
                   type="text"
-                  value={login}
-                  onChange={(e) => setLogin(e.target.value)}
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
                   required
                 />
               </div>
@@ -73,10 +72,12 @@ const Registration: React.FC = () => {
                   required
                 />
               </div>
-              {/* {userInfo.admin == true && "<div className='block'>hello</div>"} */}
-              <button className='submit-button' onClick={handleButtonClick} type="submit" disabled={status === 'loading'}>
-                {status === 'loading' ? 'Загрузка...' : 'Зарегистрироваться'}
-              </button>
+              <div className='button-group'>
+                <button className='submit-button' onClick={handleButtonClick} type="submit" disabled={status === 'loading'}>
+                  {status === 'loading' ? 'Загрузка...' : 'Зарегистрироваться'}
+                </button>
+                <button className='cancel-button' type="button" onClick={handleCloseModal}>Закрыть</button>
+              </div>
             </form>
             {status === 'success' && <p>Регистрация успешна!</p>}
             {status === 'error' && <p>Произошла ошибка при регистрации.</p>}
