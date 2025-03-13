@@ -19,7 +19,6 @@ const Registration: React.FC = () => {
       password: password
     };
     dispatch(fetchRegisterRequest(registerData));
-    setIsModalOpen(false);
   }
 
   const handleCloseModal = () => {

@@ -1,14 +1,17 @@
 import React from 'react';
 
-const Advertisement= () =>{
+const Advertisement = () => {
 
     return (
         <div className='ann'>
             <div className='annHeader'>
-                <h1>Обьявления</h1>
+                <h1>Обьявление</h1>
             </div>
             <div className='annBody'>
-                <p>Описание обьявления</p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dignissimos iste quasi nisi quod culpa quas voluptate delectus, dolorem voluptas molestiae facere quo optio distinctio cupiditate, voluptatum, beatae sit animi?
+                <div className='dateBlock'>
+                    Дата проведения: 12.11.2005
+                </div>
             </div>
         </div>
     )

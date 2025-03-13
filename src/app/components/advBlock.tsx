@@ -4,7 +4,8 @@ import Advertisement from './advertisement';
 function AdvBlock() {
 
     return (
-        <div>
+        <div className='advBlock'>
+            <h1>Ближайшие события</h1>
             <Advertisement />
         </div>
     )

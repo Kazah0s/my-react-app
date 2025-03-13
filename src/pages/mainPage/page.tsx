@@ -21,7 +21,6 @@ const MainPage = () => {
     <div>
       <Header />
       <NavBar />
-      <h1>Доска обьявлений</h1>
       <AdvBlock />
     </div>
   );

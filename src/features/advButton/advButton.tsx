@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../app/Store/store';
 
 
 const AdvButton = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [theme, setTheme] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [date, setDate] = useState<string>('');
-  // const [image, setImage] = useState([]);
+  const [theme, setTheme] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [image, setImage] = useState('');
 
+  const dispatch = useDispatch();
+  const data = useSelector((state: RootState) => state.register.data)
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setTheme('');
-    setDescription('');
+
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // alert(`Тема: ${theme}\nОписание: ${description}`);
-    handleCloseModal();
-  };
+  const handleButtonClick = () => {
+    const advData = {
+      theme: theme,
+      description: description,
+      date: date,
+      image: image,
+    };
+        // dispatch(fetchRegisterRequest(registerData));
+        // setIsModalOpen(false);
+  }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -41,14 +49,14 @@ const AdvButton = () => {
   return (
     <div >
       <button className='submit-button' onClick={() => setIsModalOpen(true)} >
-        Написать объявление
+        Создать объявление
       </button>
 
       {isModalOpen && (
         <div className='overlay'>
           <div className='modal'>
             <h2>Введите тему и описание</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleButtonClick}>
               <div className='form-group'>
                 <label htmlFor="theme">Тема:</label>
                 <input
@@ -78,17 +86,20 @@ const AdvButton = () => {
                 onChange={(e) => setDate(e.target.value)}
                 />
               </div>
-              {/* <div className='form-group'>
-                <label htmlFor="image">Фотография:</label>
+              <div className='form-group'>
+                <label htmlFor="file">Фотография:</label>
                 <input
-                type="image"
-                id="image" 
-                // value={image}
-                // onChange={(e) => setImage(e.target.files)}
+                type="url"
+                id="file" 
+                placeholder='Скопируйте адрес изображения'
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
                 />
-              </div> */}
+              </div>
               <div className='button-group'>
-                <button className='submit-button' type="submit">Отправить</button>
+                <button className='submit-button' 
+                onClick={handleButtonClick}
+                type="submit">Отправить</button>
                 <button className='cancel-button' type="button" onClick={handleCloseModal}>Закрыть</button>
               </div>
             </form>
