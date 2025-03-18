@@ -1,7 +1,7 @@
 import { apiInstance } from "./axiosInstance";
 
 export const fetchUserApi = async () => {
-  const response = await apiInstance.get('/users');
+  const response = await apiInstance.post('/register');
     if (!response.data) {
       throw new Error('Failed to fetch user');
     }
