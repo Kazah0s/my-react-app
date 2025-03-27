@@ -1,20 +1,18 @@
 import { takeEvery, call, put, take } from 'redux-saga/effects';
-// import { fetchRegisterSuccess, fetchRegisterFailure, fetchRegisterRequest } from './slice';
-// import { fetchRegisterApi, RegisterData } from '../../app/api/regApi';
-// import {apiInstance} from "../../app/api/axiosInstance"
-// import { Axios, AxiosResponse } from 'axios';
+import { fetchAdvSuccess, fetchAdvFailure, fetchAdvRequest } from './slice';
+import { fetchAdvApi, AdvensData } from '../../app/api/advApi';
+import { apiInstance } from "../../app/api/axiosInstance"
+import { Axios, AxiosResponse } from 'axios';
 
-// function* Saga(Data: Data) {
-//   try {
-//     const adv: AxiosResponse<RegisterData, null> = yield call(apiInstance.post, fetchRegisterRequest.type, regData);
-//     yield put(fetchRegisterSuccess(register.data));
-//   } catch (error: any) {
-//     yield put(fetchRegisterFailure(error.message));
-//   }
-// }
+function* fetchAdvSaga({payload}: ReturnType<typeof fetchAdvRequest>) {
+  try {
+    const advens: AxiosResponse<AdvensData, null> = yield call(fetchAdvApi, payload);
+    yield put(fetchAdvSuccess(advens.data));
+  } catch (error: any) {
+    yield put(fetchAdvFailure(error.message));
+  }
+}
 
-// export function* watchFetchRegister() {
-//   const action: RegisterData = yield take(fetchRegisterRequest.type);
-//     const regData = action; 
-//     yield call(fetchRegisterSaga, regData);
-// }
+export function* watchFetchAdv() {
+   yield takeEvery(fetchAdvRequest.type, fetchAdvSaga);
+}

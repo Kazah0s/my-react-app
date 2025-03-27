@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchAdvRequest } from './slice';
 import { RootState } from '../../app/Store/store';
 
 
@@ -12,13 +13,12 @@ const AdvButton = () => {
   const [image, setImage] = useState('');
 
   const dispatch = useDispatch();
-  const data = useSelector((state: RootState) => state.register.data)
+  const data = useSelector((state: RootState) => state.adv.data)
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-
   };
-
+  
   const handleButtonClick = () => {
     const advData = {
       theme: theme,
@@ -26,8 +26,7 @@ const AdvButton = () => {
       date: date,
       image: image,
     };
-        // dispatch(fetchRegisterRequest(registerData));
-        // setIsModalOpen(false);
+    dispatch(fetchAdvRequest(advData))
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
