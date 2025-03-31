@@ -4,7 +4,7 @@ import { fetchAdvApi, AdvensData } from '../../app/api/advApi';
 import { apiInstance } from "../../app/api/axiosInstance"
 import { Axios, AxiosResponse } from 'axios';
 
-function* fetchAdvSaga({payload}: ReturnType<typeof fetchAdvRequest>) {
+function* fetchAdvSaga({ payload }: ReturnType<typeof fetchAdvRequest>) {
   try {
     const advens: AxiosResponse<AdvensData, null> = yield call(fetchAdvApi, payload);
     yield put(fetchAdvSuccess(advens.data));
@@ -14,5 +14,5 @@ function* fetchAdvSaga({payload}: ReturnType<typeof fetchAdvRequest>) {
 }
 
 export function* watchFetchAdv() {
-   yield takeEvery(fetchAdvRequest.type, fetchAdvSaga);
+  yield takeEvery(fetchAdvRequest.type, fetchAdvSaga);
 }

@@ -4,7 +4,7 @@ import { fetchRegisterApi, RegisterData } from '../../app/api/regApi';
 import { apiInstance } from "../../app/api/axiosInstance"
 import { Axios, AxiosResponse } from 'axios';
 
-function* fetchRegisterSaga({payload}: ReturnType<typeof fetchRegisterRequest>) {
+function* fetchRegisterSaga({ payload }: ReturnType<typeof fetchRegisterRequest>) {
   try {
     const register: AxiosResponse<RegisterData, null> = yield call(fetchRegisterApi, payload);
     yield put(fetchRegisterSuccess(register.data));
@@ -14,5 +14,5 @@ function* fetchRegisterSaga({payload}: ReturnType<typeof fetchRegisterRequest>) 
 }
 
 export function* watchFetchRegister() {
-   yield takeEvery(fetchRegisterRequest.type, fetchRegisterSaga);
+  yield takeEvery(fetchRegisterRequest.type, fetchRegisterSaga);
 }

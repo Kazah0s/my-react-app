@@ -6,7 +6,7 @@ export type RegisterData = {
 }
 
 export const fetchRegisterApi = async (regData: RegisterData) => {
-  const response = await apiInstance.post('/register', regData);
+  const response = await apiInstance.post('', regData);
   if (!response.data) {
     throw new Error('Failed to fetch admin');
   }
