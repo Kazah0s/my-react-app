@@ -5,8 +5,8 @@ import { watchFetchRegister } from '../../features/register/saga';
 
 export default function* rootSaga() {
   yield all([
-    watchFetchUser(),
     // watchFetchAdmin(),
+    watchFetchUser(),
     watchFetchRegister(),
   ]);
 }

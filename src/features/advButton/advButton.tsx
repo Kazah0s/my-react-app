@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdvRequest } from './slice';
 import { RootState } from '../../app/Store/store';
-import styles from '../../styles/style.scss';
 
 const AdvButton = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -33,7 +32,6 @@ const AdvButton = () => {
       image,
     };
     dispatch(fetchAdvRequest(advData));
-    // Очищаем форму после отправки
     setTheme('');
     setDescription('');
     setDate('');
@@ -62,9 +60,9 @@ const AdvButton = () => {
   }, [isModalOpen]);
 
   return (
-    <div className="container">
+    <div className="adv-container">
       <button
-        className="triggerButton"
+        className="adv-trigger-button"
         onClick={() => setIsModalOpen(true)}
       >
         Создать объявление
@@ -72,84 +70,85 @@ const AdvButton = () => {
 
       {isModalOpen && (
         <div
-          className={`${"overlay"} ${isClosing ? "fadeOut" : "fadeIn"}`}
+          className={`adv-overlay ${isClosing ? 'adv-fade-out' : 'adv-fade-in'}`}
           onClick={handleCloseModal}
         >
           <div
-            className={`${"modal"} ${isClosing ? "slideDown" : "slideUp"}`}
+            className={`adv-modal ${isClosing ? 'adv-slide-down' : 'adv-slide-up'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className={"closeButton"}
+              className="adv-close-button"
               onClick={handleCloseModal}
               aria-label="Закрыть модальное окно"
             >
               &times;
             </button>
 
-            <h2 className={"title"}>Новое объявление</h2>
+            <h2 className="adv-title">Новое объявление</h2>
 
-            <form onSubmit={handleSubmit} className={"form"}>
-              <div className={"formGroup"}>
-                <label htmlFor="theme" className={"label"}>Тема</label>
+            <form onSubmit={handleSubmit} className="adv-form">
+              <div className="adv-form-group">
+                <label htmlFor="theme" className="adv-label">Тема</label>
                 <input
                   type="text"
                   id="theme"
                   value={theme}
                   onChange={(e) => setTheme(e.target.value)}
+                  className="adv-input"
                   required
                   placeholder="Краткий заголовок"
                 />
               </div>
 
-              <div className={"formGroup"}>
-                <label htmlFor="description" className={"label"}>Описание</label>
+              <div className="adv-form-group">
+                <label htmlFor="description" className="adv-label">Описание</label>
                 <textarea
                   id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                  className="adv-textarea"
                   required
                   maxLength={250}
-                  className={"textarea"}
                   placeholder="Подробное описание (максимум 250 символов)"
                 />
-                <span className={"counter"}>{description.length}/250</span>
+                <span className="adv-counter">{description.length}/250</span>
               </div>
 
-              <div className={"formGroup"}>
-                <label htmlFor="date" className={"label"}>Дата проведения</label>
+              <div className="adv-form-group">
+                <label htmlFor="date" className="adv-label">Дата проведения</label>
                 <input
                   type="date"
                   id="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className={"input"}
+                  className="adv-input"
                 />
               </div>
 
-              <div className={"formGroup"}>
-                <label htmlFor="image" className={"label"}>Изображение (URL)</label>
+              <div className="adv-form-group">
+                <label htmlFor="image" className="adv-label">Изображение (URL)</label>
                 <input
                   type="url"
                   id="image"
                   placeholder="https://example.com/image.jpg"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
-                  className={"input"}
+                  className="adv-input"
                 />
               </div>
 
-              <div className={"actions"}>
+              <div className="adv-actions">
                 <button
                   type="button"
-                  className={"cancelButton"}
+                  className="adv-cancel-button"
                   onClick={handleCloseModal}
                 >
-                  Отмена
+                  Закрыть
                 </button>
                 <button
                   type="submit"
-                  className={"submitButton"}
+                  className="adv-submit-button"
                 >
                   Опубликовать
                 </button>

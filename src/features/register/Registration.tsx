@@ -7,7 +7,7 @@ import { RootState } from '../../app/Store/store';
 const Registration: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [username, setusername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
@@ -34,57 +34,83 @@ const Registration: React.FC = () => {
   useEffect(() => {
     if (isModalOpen) {
       document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
     }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
     };
   }, [isModalOpen]);
 
 
   return (
-    <div>
-      <button onClick={() => setIsModalOpen(true)} className='submit-button'>
+    <div className="registration-container">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="registration-button"
+      >
         Зарегистрироваться
       </button>
 
       {isModalOpen && (
-        <div className='overlay'>
-          <div className='modal'>
-            <h2>Регистрация</h2>
-            <form>
-              <div className='form-group'>
-                <label>Логин:</label>
+        <div className="registration-overlay">
+          <div className="registration-modal">
+            <button
+              className="registration-close-button"
+              onClick={handleCloseModal}
+            >
+              &times;
+            </button>
+
+            <h2 className="registration-title">Регистрация</h2>
+
+            <form onSubmit={handleButtonClick} className="registration-form">
+              <div className="registration-form-group">
+                <label className="registration-label">Логин:</label>
                 <input
                   type="text"
                   value={username}
-                  onChange={(e) => setusername(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="registration-input"
                   required
                 />
               </div>
-              <div className='form-group'>
-                <label>Пароль:</label>
+
+              <div className="registration-form-group">
+                <label className="registration-label">Пароль:</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="registration-input"
                   required
                 />
               </div>
-              <div className='button-group'>
-                <button className='submit-button' onClick={handleButtonClick} type="submit" disabled={status === 'loading'}>
-                  {status === 'loading' ? 'Загрузка...' : 'Зарегистрироваться'}
+
+              <div className="registration-button-group">
+                <button
+                  className="registration-cancel-button"
+                  type="button"
+                  onClick={handleCloseModal}
+                >
+                  Закрыть
                 </button>
-                <button className='cancel-button' type="button" onClick={handleCloseModal}>Закрыть</button>
+                <button
+                  className="registration-submit-button"
+                  type="submit"
+                >
+                  Зарегистрироваться
+                </button>
+
               </div>
             </form>
-            {status === 'success' && <p>Регистрация успешна!</p>}
-            {status === 'error' && <p>Произошла ошибка при регистрации.</p>}
           </div>
         </div>
       )}
     </div>
-
   );
 };
 

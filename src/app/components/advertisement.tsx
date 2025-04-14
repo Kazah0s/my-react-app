@@ -1,20 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Advertisement = () => {
+export interface AdvertisementProps {
+    id: string;
+    theme: string;
+    description: string;
+    date: string;
+    imageUrl?: string;
+}
+
+const Advertisement: React.FC<AdvertisementProps> = ({
+    theme = "Тема",
+    description = "аылвдфрадывфоафыврдаыфвоардывфларолыфвлафаывфафыва ыфвафыва фыва фыаыф выф выф вфыв фывфывв ыфвфы вфыв фывфыв фывфы вфыв фывфыв фыв фывыфв фывфывыф выфв фывфывфы вфыв",
+    date = "02.05.2005",
+    imageUrl = "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg"
+}) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
 
     return (
-        <div className='ann'>
-            <div className='annHeader'>
-                <h1>Обьявление</h1>
+        <>
+            <div
+                className="ann-card"
+                onClick={() => setIsExpanded(true)}
+            >
+                <h3 className="ann-theme">{theme}</h3>
+                {imageUrl && (
+                    <div className="ann-image-container">
+                        <img
+                            src={imageUrl}
+                            alt={theme}
+                            className="ann-image"
+                        />
+                    </div>
+                )}
+                <p className="ann-description">{shortDescription}</p>
+                <div className="ann-date">Дата: {date}</div>
             </div>
-            <div className='annBody'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dignissimos iste quasi nisi quod culpa quas voluptate delectus, dolorem voluptas molestiae facere quo optio distinctio cupiditate, voluptatum, beatae sit animi?
-                <div className='dateBlock'>
-                    Дата проведения: 12.11.2005
+
+            {isExpanded && (
+                <div className="ann-overlay" onClick={() => setIsExpanded(false)}>
+                    <div className="ann-expanded" onClick={(e) => e.stopPropagation()}>
+                        <button
+                            className="ann-close-button"
+                            onClick={() => setIsExpanded(false)}
+                        >
+                            &times;
+                        </button>
+                        <h2 className="ann-expanded-theme">{theme}</h2>
+                        {imageUrl && (
+                            <div className="ann-expanded-image-container">
+                                <img
+                                    src={imageUrl}
+                                    alt={theme}
+                                    className="ann-expanded-image"
+                                />
+                            </div>
+                        )}
+                        <p className="ann-expanded-description">{description}</p>
+                        <div className="ann-expanded-date">Дата проведения: {date}</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    )
-}
+            )}
+        </>
+    );
+};
 
 export default Advertisement;

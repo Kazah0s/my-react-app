@@ -29,21 +29,31 @@ p {
   margin: 0;
 }
 
+/* ==================== */
+/* Существующие стили */
+/* ==================== */
+
 // Header Styles
 .header {
   background-color: $secondary-color;
   padding: 1rem;
   margin: 0;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 100;
+}
+
+.header-logo {
+  height: 40px;
+  width: auto;
 }
 
 .headerBtnBlock {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .userBlock {
@@ -103,7 +113,117 @@ p {
   font-size: 0.9rem;
 }
 
-// Modal Overlay (совместимость со старым кодом)
+/* ==================== */
+/* Новые стили для регистрации */
+/* ==================== */
+
+.registration-container {
+  display: inline-block;
+}
+
+.registration-button {
+  padding: 10px 20px;
+  background-color: $green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $green, #000, 85%;
+  }
+}
+
+.registration-overlay {
+  @extend .overlay;
+}
+
+.registration-modal {
+  @extend .modal;
+  max-width: 400px;
+}
+
+.registration-close-button {
+  @extend .modal-close;
+}
+
+.registration-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  color: $dark-gray;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-form-group {
+  @extend .form-group;
+}
+
+.registration-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: $dark-gray;
+}
+
+.registration-input {
+  @extend input;
+  max-width: 93%
+}
+
+.registration-button-group {
+  @extend .button-group;
+}
+
+.registration-submit-button {
+  @extend .submit-button;
+
+  &:hover:not(:disabled) {
+    background-color: $green, #000, 85%;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}
+
+.registration-cancel-button {
+  @extend .cancel-button;
+
+  &:hover {
+    background-color: $red, #000, 85%;
+  }
+}
+
+.registration-message {
+  margin-top: 15px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+
+  &.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+
+  &.error {
+    background-color: #f2dede;
+    color: #a94442;
+  }
+}
+
+/* ==================== */
+/* Общие стили (существующие + новые) */
+/* ==================== */
+
+// Modal Overlay
 .overlay {
   position: fixed;
   top: 0;
@@ -126,7 +246,7 @@ p {
   }
 }
 
-// Modal (совместимость + новые улучшения)
+// Modal
 .modal {
   background-color: #fff;
   padding: 2rem;
@@ -167,7 +287,7 @@ p {
   }
 }
 
-// Form Styles (совместимость + улучшения)
+// Form Elements
 .form-group {
   margin-bottom: 1.25rem;
 
@@ -196,28 +316,7 @@ textarea {
   }
 }
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
-  max-height: 200px;
-}
-
-// Date Input Specific
-input[type="date"] {
-  border: 1px solid $border-color;
-  padding: 0.75rem 1rem;
-
-  &::-webkit-datetime-edit-text {
-    color: $secondary-color;
-    padding: 0 0.3em;
-  }
-
-  &::-webkit-calendar-picker-indicator {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%239605ca' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
-  }
-}
-
-// Buttons (совместимость + улучшения)
+// Buttons
 .button-group {
   display: flex;
   justify-content: flex-end;
@@ -237,7 +336,7 @@ input[type="date"] {
   transition: background-color 0.2s, transform 0.2s;
 
   &:hover {
-    background-color: $green;
+    background-color: $green, #000, 85%;
     transform: translateY(-1px);
   }
 
@@ -251,17 +350,8 @@ input[type="date"] {
   background-color: $red;
 
   &:hover {
-    background-color: $red, 8%;
+    background-color: $red, #000, 85%;
   }
-}
-
-// Character Counter
-.char-counter {
-  display: block;
-  text-align: right;
-  font-size: 0.8rem;
-  color: $gray;
-  margin-top: 0.25rem;
 }
 
 // Animations
@@ -309,19 +399,447 @@ input[type="date"] {
   }
 }
 
-// Responsive Adjustments
+// Responsive
 @media (max-width: 576px) {
-  .modal {
+
+  .modal,
+  .registration-modal {
     padding: 1.5rem;
     width: 95%;
   }
 
-  .button-group {
+  .button-group,
+  .registration-button-group {
     flex-direction: column;
   }
 
   .submit-button,
-  .cancel-button {
+  .cancel-button,
+  .registration-submit-button,
+  .registration-cancel-button {
     width: 100%;
+  }
+}
+
+.adv-container {
+  display: inline-block;
+}
+
+.adv-trigger-button {
+  padding: 10px 20px;
+  background-color: $green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $green, #000, 85%;
+    transform: translateY(-1px);
+  }
+}
+
+.adv-overlay {
+  @extend .overlay;
+}
+
+.adv-modal {
+  @extend .modal;
+}
+
+.adv-close-button {
+  @extend .modal-close;
+}
+
+.adv-title {
+  margin: 0 0 20px;
+  color: $dark-gray;
+  text-align: center;
+}
+
+.adv-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.adv-form-group {
+  @extend .form-group;
+}
+
+.adv-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: $dark-gray;
+}
+
+.adv-input,
+.adv-textarea {
+  @extend input;
+  max-width: 93%;
+}
+
+.adv-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.adv-counter {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: $gray;
+  margin-top: 5px;
+}
+
+.adv-actions {
+  @extend .button-group;
+}
+
+.adv-submit-button {
+  @extend .submit-button;
+}
+
+.adv-cancel-button {
+  @extend .cancel-button;
+}
+
+/* Анимации */
+.adv-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.adv-fade-out {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+.adv-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.adv-slide-down {
+  animation: slideDown 0.3s ease-in forwards;
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+  .adv-modal {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .adv-actions {
+    flex-direction: column;
+  }
+
+  .adv-submit-button,
+  .adv-cancel-button {
+    width: 100%;
+  }
+}
+
+/* ==================== */
+/* Стили для карточек объявлений */
+/* ==================== */
+
+.ann-card {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  width: calc(25% - 20px);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: white;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.ann-theme {
+  margin: 0 0 10px;
+  color: $dark-gray;
+  font-size: 1.1rem;
+}
+
+.ann-image-container {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.ann-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+
+  .ann-card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.ann-description {
+  margin: 0 0 10px;
+  color: $gray;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.ann-date {
+  color: $blue;
+  font-size: 0.8rem;
+}
+
+/* Стили для развернутого просмотра */
+.ann-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.ann-expanded {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.ann-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: $gray;
+
+  &:hover {
+    color: $dark-gray;
+  }
+}
+
+.ann-expanded-theme {
+  margin: 0 0 20px;
+  color: $dark-gray;
+  font-size: 1.5rem;
+}
+
+.ann-expanded-image-container {
+  width: 100%;
+  max-height: 400px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.ann-expanded-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.ann-expanded-description {
+  margin: 0 0 20px;
+  color: $dark-gray;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.ann-expanded-date {
+  color: $blue;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+  .ann-card {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 900px) {
+  .ann-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .ann-card {
+    width: calc(100% - 20px);
+  }
+}
+
+.userBlock {
+  position: relative;
+  margin: 0.2rem;
+}
+
+.userName {
+  margin: 0;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.userMenu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  overflow: hidden;
+  z-index: 101;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.menuHeader {
+  padding: 12px 16px;
+  background-color: $primary-color;
+  color: white;
+  font-weight: bold;
+}
+
+.menuButton {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.logoutButton {
+  color: $red;
+  border-top: 1px solid $border-color;
+}
+
+/* Анимация появления меню */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .headerBtnBlock {
+    gap: 10px;
+  }
+
+  .userName {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .userMenu {
+    min-width: 180px;
+  }
+}
+
+/* Авторизация */
+.login-form {
+  display: flex;
+  gap: 10px;
+
+  input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+.user-block {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .username {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .logout-button {
+    padding: 6px 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+/* Панель модерации */
+.moderation-panel {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  .moderation-item {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+
+    button {
+      padding: 6px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   }
 }

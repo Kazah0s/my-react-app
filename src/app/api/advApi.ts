@@ -8,7 +8,7 @@ export type AdvensData = {
 }
 
 export const fetchAdvApi = async (advData: AdvensData) => {
-  const response = await apiInstance.post('/advensed', advData);
+  const response = await apiInstance.post('/users', advData);
   if (!response.data) {
     throw new Error('Failed to fetch admin');
   }
