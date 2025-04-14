@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRegisterRequest } from './slice';
 import { RootState } from '../../app/Store/store';
@@ -13,7 +13,8 @@ const Registration: React.FC = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: RootState) => state.register.data)
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const registerData = {
       username: username,
       password: password
