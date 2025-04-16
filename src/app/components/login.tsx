@@ -11,12 +11,35 @@ const Login: React.FC<LoginProps> = ({
   username = 'kazah',
 }) => {
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isClosing, setIsClosing] = useState<boolean>(false);
+
+
+  const handleCloseModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsClosing(false);
+    }, 300);
+  };
+
+
+
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      handleCloseModal();
+    }
+  };
+
+
   return (
     <>
       <div
-        className="userBlock">
-
-        {name}
+        className="userBlock"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <p>{name}</p>
       </div>
     </>
   )

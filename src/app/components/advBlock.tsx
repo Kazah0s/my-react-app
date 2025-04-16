@@ -1,5 +1,5 @@
 import React from 'react';
-import Advertisement from './advertisement';
+import Advertisement from './Advertisement';
 
 function AdvBlock() {
 
