@@ -10,7 +10,7 @@ export interface AdvertisementProps {
 
 const Advertisement: React.FC<AdvertisementProps> = ({
     theme = "Тема",
-    description = "аылвдфрадывфоафыврдаыфвоардывфларолыфвлафаывфафыва ыфвафыва фыва фыаыф выф выф вфыв фывфывв ыфвфы вфыв фывфыв фывфы вфыв фывфыв фыв фывыфв фывфывыф выфв фывфывфы вфыв",
+    description = "",
     date = "02.05.2005",
     imageUrl = "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg"
 }) => {

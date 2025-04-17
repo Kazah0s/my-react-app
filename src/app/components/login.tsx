@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
 export interface LoginProps {
-  name: string;
   username: string;
   password: string;
 }
 
 const Login: React.FC<LoginProps> = ({
-  name = 'Максим',
-  username = 'kazah',
+  username = 'dasdsa',
+  password = "ewq3s"
 }) => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -39,7 +38,7 @@ const Login: React.FC<LoginProps> = ({
         className="userBlock"
         onClick={() => setIsModalOpen(true)}
       >
-        <p>{name}</p>
+        <p>{username}</p>
       </div>
     </>
   )

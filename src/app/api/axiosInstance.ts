@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
   baseURL, // Базовый URL
   timeout: 30000, // Таймаут запроса (10 секунд)
   headers: {
-    'Content-Type': 'application/json', // Заголовки по умолчанию
+    'Content-Type': 'application/json'
   },
 });
 
