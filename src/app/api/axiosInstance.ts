@@ -27,3 +27,7 @@ axiosInstance.interceptors.response.use(response => {
 });
 
 export const apiInstance = axiosInstance;
+
+
+
+// REACT_APP_API_BASE_URL="https://jsonplaceholder.typicode.com"

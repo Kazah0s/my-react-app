@@ -6,7 +6,7 @@ export type RegisterData = {
 }
 
 export const fetchRegisterApi = async (regData: RegisterData) => {
-  const response = await apiInstance.post('/auth/register', regData);
+  const response = await apiInstance.post('/users', regData);
   if (!response.data) {
     throw new Error('Failed to fetch regist');
   }

@@ -6,10 +6,10 @@ export type UsersData = {
 }
 
 export const fetchUserApi = async () => {
-  const response = await apiInstance.post('/auth/login', {
-    username: 'asd',
-    password: "123",
-  },{
+  const response = await apiInstance.post('/users', {
+    username: 'user',
+    password: "user",
+  }, {
     withCredentials: true
   });
   if (!response.data) {

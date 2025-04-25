@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 
 export interface AdvertisementProps {
-    id: string;
-    theme: string;
+    creatorName: string;
+    title: string;
     description: string;
-    date: string;
-    imageUrl?: string;
+    eventDate: string;
+    imageBase64?: string;
+    isModer: boolean;
 }
 
 const Advertisement: React.FC<AdvertisementProps> = ({
-    theme = "Тема",
+    title = "Тема",
     description = "",
-    date = "02.05.2005",
-    imageUrl = "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg"
+    eventDate = "02.05.2005",
+    imageBase64 = "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
+    isModer = true,
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
@@ -20,21 +22,22 @@ const Advertisement: React.FC<AdvertisementProps> = ({
     return (
         <>
             <div
+
                 className="ann-card"
                 onClick={() => setIsExpanded(true)}
             >
-                <h3 className="ann-theme">{theme}</h3>
-                {imageUrl && (
+                <h3 className="ann-theme">{title}</h3>
+                {imageBase64 && (
                     <div className="ann-image-container">
                         <img
-                            src={imageUrl}
-                            alt={theme}
+                            src={imageBase64}
+                            alt={title}
                             className="ann-image"
                         />
                     </div>
                 )}
                 <p className="ann-description">{shortDescription}</p>
-                <div className="ann-date">Дата: {date}</div>
+                <div className="ann-date">Дата: {eventDate}</div>
             </div>
 
             {isExpanded && (
@@ -46,18 +49,18 @@ const Advertisement: React.FC<AdvertisementProps> = ({
                         >
                             &times;
                         </button>
-                        <h2 className="ann-expanded-theme">{theme}</h2>
-                        {imageUrl && (
+                        <h2 className="ann-expanded-theme">{title}</h2>
+                        {imageBase64 && (
                             <div className="ann-expanded-image-container">
                                 <img
-                                    src={imageUrl}
-                                    alt={theme}
+                                    src={imageBase64}
+                                    alt={title}
                                     className="ann-expanded-image"
                                 />
                             </div>
                         )}
                         <p className="ann-expanded-description">{description}</p>
-                        <div className="ann-expanded-date">Дата проведения: {date}</div>
+                        <div className="ann-expanded-date">Дата проведения: {eventDate}</div>
                     </div>
                 </div>
             )}

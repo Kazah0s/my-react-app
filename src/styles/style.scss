@@ -927,3 +927,24 @@ textarea {
     min-width: 180px;
   }
 }
+
+.allADV {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: 100%;
+}
+
+.myADV {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: 100%;
+}
+
+.my {
+  margin: 5%;
+  border: solid $gray 2px;
+  padding: 16px;
+
+}
