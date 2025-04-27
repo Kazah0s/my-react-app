@@ -14,7 +14,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({
     description = "",
     eventDate = "02.05.2005",
     imageBase64 = "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
-    isModer = true,
+    isModer = false,
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
@@ -22,8 +22,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({
     return (
         <>
             <div
-
-                className="ann-card"
+                className={isModer == false ? "ann-card-notModer" : "ann-card"}
                 onClick={() => setIsExpanded(true)}
             >
                 <h3 className="ann-theme">{title}</h3>
