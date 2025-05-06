@@ -6,6 +6,7 @@ import { Axios, AxiosResponse } from 'axios';
 function* fetchRegisterSaga({ payload }: ReturnType<typeof fetchRegisterRequest>) {
   try {
     const register: AxiosResponse<RegisterData, null> = yield call(fetchRegisterApi, payload);
+    yield localStorage.setItem("user", JSON.stringify(register.data));
     yield put(fetchRegisterSuccess(register.data));
   } catch (error: any) {
     yield put(fetchRegisterFailure(error.message));

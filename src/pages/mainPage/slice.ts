@@ -3,17 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface UserState {
   username: string;
   password: string,
-  data: any | null;
+  moderator: boolean,
   loading: boolean;
-  error: string | null;
 }
 
 const initialState: UserState = {
-  username: "asd",
-  password: "123",
-  data: null,
+  username: "user",
+  password: "user",
+  moderator: false,
   loading: false,
-  error: null,
 };
 
 export const { actions, reducer } = createSlice({
@@ -24,11 +22,13 @@ export const { actions, reducer } = createSlice({
       state.loading = true;
     },
     fetchUserSuccess: (state, action: PayloadAction<any>) => {
-      state.data = action.payload;
-      state.loading = false;
+      state.username = action.payload.username
+      state.password = action.payload.password
+      state.moderator = action.payload.moderator
+
+      state.loading = false
     },
     fetchUserFailure: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
       state.loading = false;
     },
   },

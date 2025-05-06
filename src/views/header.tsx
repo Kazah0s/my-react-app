@@ -44,7 +44,7 @@ const Header = () => {
 
     return (
         <div className="header">
-            <img src="" alt="logo" className="header-logo" />
+            {/* <img src="" alt="logo" className="header-logo" /> */}
             <div className="headerBtnBlock">
                 <Registration />
                 <div className="userBlock" ref={menuRef}>

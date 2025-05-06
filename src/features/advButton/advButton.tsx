@@ -2,18 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdvRequest } from './slice';
 import { RootState } from '../../app/Store/store';
+import { AdvensData } from '../../app/api/advApi';
 
 const AdvButton = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState<boolean>(false);
 
-  const [theme, setTheme] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [image, setImage] = useState('');
+
+  const [advState, setAdvState] = useState({
+    creator: "",
+    title: "",
+    description: "",
+    date: "",
+    image: "",
+  });
+
+  const [moder, setModer] = useState(false)
 
   const dispatch = useDispatch();
-  const data = useSelector((state: RootState) => state.adv.data);
+  // const data = useSelector((state: RootState) => state.adv.data);
 
   const handleCloseModal = () => {
     setIsClosing(true);
@@ -25,17 +32,22 @@ const AdvButton = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const advData = {
-      theme,
-      description,
-      date,
-      image,
+    const advData: AdvensData = {
+      creatorName: advState.creator,
+      isModer: moder,
+      title: advState.title,
+      description: advState.description,
+      eventDate: advState.date,
     };
     dispatch(fetchAdvRequest(advData));
-    setTheme('');
-    setDescription('');
-    setDate('');
-    setImage('');
+    setAdvState({
+      creator: "",
+      title: "",
+      description: "",
+      date: "",
+      image: "",
+    })
+    setModer(false);
     handleCloseModal();
   };
 
@@ -44,6 +56,8 @@ const AdvButton = () => {
       handleCloseModal();
     }
   };
+
+
 
   useEffect(() => {
     if (isModalOpen) {
@@ -89,12 +103,12 @@ const AdvButton = () => {
 
             <form onSubmit={handleSubmit} className="adv-form">
               <div className="adv-form-group">
-                <label htmlFor="theme" className="adv-label">Тема</label>
+                <label htmlFor="title" className="adv-label">Тема</label>
                 <input
                   type="text"
-                  id="theme"
-                  value={theme}
-                  onChange={(e) => setTheme(e.target.value)}
+                  id="title"
+                  value={advState.title}
+                  onChange={(e) => setAdvState(prev => ({ ...prev, title: e.target.value }))}
                   className="adv-input"
                   required
                   placeholder="Краткий заголовок"
@@ -105,14 +119,14 @@ const AdvButton = () => {
                 <label htmlFor="description" className="adv-label">Описание</label>
                 <textarea
                   id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={advState.description}
+                  onChange={(e) => setAdvState(prev => ({ ...prev, description: e.target.value }))}
                   className="adv-textarea"
                   required
                   maxLength={250}
                   placeholder="Подробное описание (максимум 250 символов)"
                 />
-                <span className="adv-counter">{description.length}/250</span>
+                <span className="adv-counter">{advState.description.length}/250</span>
               </div>
 
               <div className="adv-form-group">
@@ -120,8 +134,8 @@ const AdvButton = () => {
                 <input
                   type="date"
                   id="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
+                  value={advState.date}
+                  onChange={(e) => setAdvState(prev => ({ ...prev, date: e.target.value }))}
                   className="adv-input"
                 />
               </div>
@@ -132,8 +146,8 @@ const AdvButton = () => {
                   type="url"
                   id="image"
                   placeholder="https://example.com/image.jpg"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
+                  value={advState.image}
+                  onChange={(e) => setAdvState(prev => ({ ...prev, image: e.target.value }))}
                   className="adv-input"
                 />
               </div>

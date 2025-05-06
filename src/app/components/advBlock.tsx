@@ -1,28 +1,32 @@
 import React from 'react';
 import Advertisement from './advertisement';
+import { useSelector } from 'react-redux';
+import { RootState } from '../Store/store';
+import { AdvState } from '../../features/advButton/slice';
+
 
 function AdvBlock() {
+    const ads = useSelector((state: RootState) => state.adv)
+    const currentUser = useSelector((state: RootState) => state.user)
+    const myADS = ads.filter(element => element.creatorName === currentUser.username)
+    let userAds: AdvState[] = []
+
+    if (!currentUser.moderator) {
+        userAds = ads.filter(element => element.isModer)
+
+    } else userAds = ads
+
     return (
         <div className='advBlock'>
             <h1>Ближайшие события</h1>
             <div className='allADV'>
-                <Advertisement creatorName={''} title={'Новый год'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={'12.02.2133'} isModer={false} />
-                <Advertisement creatorName={''} title={'День рождения'} description={'аываыфмвсч паывп ывапа вгыпавыправп шавыпаывпр лывап рвыап лвыапвыап выап выап ывап вап выап ыва'} eventDate={'21.54.3421'} isModer={true} />
-                <Advertisement creatorName={''} title={'Пасха'} description={'sd fsdg fksdagfh jasdgfsgad kjasdf jksdgfsgakfsdgfhgsdakf sadf gsdafkjsd kfsdf sakfgksajgfskjadgfsadgfkjas'} eventDate={'12.23.5125'} isModer={false} />
-                <Advertisement creatorName={''} title={'9 мая'} description={' sdfhjk dsafjdksafahslkfshdajklfasdh fsadfasdfjksadhlfgsdagfhjksadgfsald fgsldafglsafslad'} eventDate={'02.18.2913'} isModer={true} />
-                <Advertisement creatorName={''} title={'Лето'} description={'нут тут твыфвосяочл солдфывол фыолваыаоитывитсмырифыврлоа прывфамрывф армыфвам рывфмалорп ывфмапролывфма оывфмафырвоамырфовлмалроыфв мроамыфврома роыфвмаорывфма роымфвоамы фвомаолрыфвм оа'} eventDate={'10.20.1028'} isModer={false} />
+                {userAds.map(element => <Advertisement advObj={element} />)}
             </div>
 
             <div className='my'>
                 <h1>Мои события</h1>
-                <div className='myADV'>
-                    <Advertisement creatorName={''} title={'NTvf'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={''} isModer={false} />
-                    <Advertisement creatorName={''} title={'NTvf'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={''} isModer={true} />
-                    <Advertisement creatorName={''} title={'NTvf'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={''} isModer={true} />
-                    <Advertisement creatorName={''} title={'NTvf'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={''} isModer={true} />
-                    <Advertisement creatorName={''} title={'NTvf'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={''} isModer={true} />
-                    <Advertisement creatorName={''} title={'NTvf'} description={'dasdasdasdasdasddasdasdasdasdasddasdasdasdas  dasddasd  asdasdasda sddas das asdas asd dasdasdasdasdasddasdasdasdasdasd'} eventDate={''} isModer={true} />
-
+                <div className='myADV' id="myADV">
+                    {myADS.map(element => <Advertisement advObj={element} />)}
                 </div>
             </div>
         </div>

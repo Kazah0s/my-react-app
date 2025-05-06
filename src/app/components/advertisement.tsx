@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
+import { AdvState } from '../../features/advButton/slice';
 
-export interface AdvertisementProps {
-    creatorName: string;
-    title: string;
-    description: string;
-    eventDate: string;
-    imageBase64?: string;
-    isModer: boolean;
+interface AdvertisementProps {
+    advObj: AdvState;
 }
 
-const Advertisement: React.FC<AdvertisementProps> = ({
-    title = "Тема",
-    description = "",
-    eventDate = "02.05.2005",
-    imageBase64 = "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
-    isModer = false,
-}) => {
+const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
+    const {
+        creatorName = "",
+        title = "",
+        description = "",
+        eventDate = "",
+        imageBase64 = "",
+        isModer = false,
+    } = advObj;
+
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
 
@@ -25,7 +24,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({
                 className={isModer == false ? "ann-card-notModer" : "ann-card"}
                 onClick={() => setIsExpanded(true)}
             >
-                <h3 className="ann-theme">{title}</h3>
+                <h3 className="ann-theme">{title} {creatorName}</h3>
                 {imageBase64 && (
                     <div className="ann-image-container">
                         <img

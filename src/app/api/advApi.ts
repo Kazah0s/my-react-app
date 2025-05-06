@@ -1,10 +1,12 @@
 import { apiInstance } from "./axiosInstance";
 
 export type AdvensData = {
-  theme: string,
-  description: string,
-  date: string,
-  image: string
+  creatorName: string;
+  title: string;
+  description: string;
+  eventDate: string;
+  imageBase64?: string;
+  isModer: boolean;
 }
 
 export const fetchAdvApi = async (advData: AdvensData) => {

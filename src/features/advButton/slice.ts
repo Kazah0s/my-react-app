@@ -1,33 +1,57 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdvensData } from '../../app/api/advApi';
 
-interface AdvState {
-  data: any | null;
-  loading: boolean;
-  error: string | null;
+
+export interface AdvState {
+  creatorName: string;
+  title: string;
+  description: string;
+  eventDate: string;
+  imageBase64?: string;
+  isModer: boolean;
 }
 
-const initialState: AdvState = {
-  data: null,
-  loading: false,
-  error: null,
-};
+const initialState: AdvState[] = [
+  {
+    creatorName: 'sam',
+    title: "1",
+    description: "",
+    eventDate: "",
+    imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
+    isModer: false,
+  },
+  {
+    creatorName: 'frank',
+    title: "2",
+    description: "",
+    eventDate: "",
+    imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
+    isModer: true,
+  },
+  {
+    creatorName: 'dave',
+    title: "3",
+    description: "",
+    eventDate: "",
+    imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
+    isModer: false,
+  }
+];
+
+
 
 export const { actions, reducer } = createSlice({
-  name: 'Adv',
+  name: 'adv',
   initialState,
   reducers: {
     fetchAdvRequest: (state, action: PayloadAction<AdvensData>) => {
-      state.data = action.payload;
-      state.loading = true;
+
     },
     fetchAdvSuccess: (state, action: PayloadAction<any>) => {
-      // state.data = action.payload;
-      state.loading = false;
+
     },
     fetchAdvFailure: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-      state.loading = false;
+
     },
   },
 });
