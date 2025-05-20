@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { AdvState } from '../../features/advButton/slice';
+import { AdvState, deleteAdRequest, updateAdRequest } from '../../features/advButton/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../Store/store';
+import { EditAdModal } from '../../features/EditAdModal';
 
 interface AdvertisementProps {
     advObj: AdvState;
 }
-
 const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const {
         creatorName = "",
@@ -17,6 +19,26 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
+
+
+
+
+
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state: RootState) => state.user);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    // Проверка прав (как в AdvBlock)
+    const isAuthor = advObj.creatorName === currentUser.username;
+    const isAdmin = currentUser.moderator;
+
+    const handleDelete = () => {
+        if (window.confirm('Удалить объявление?')) {
+            dispatch(deleteAdRequest(advObj.title)); // Лучше использовать ID
+        }
+    };
+
+
 
     return (
         <>
@@ -58,9 +80,35 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                             </div>
                         )}
                         <p className="ann-expanded-description">{description}</p>
-                        <div className="ann-expanded-date">Дата проведения: {eventDate}</div>
+                        <div className="ann-expanded-date">
+
+                            <p>Дата проведения: {eventDate}</p>
+
+
+                            <div className='subButtons'>
+                                {isAuthor && (
+                                    <p className='actionButton' onClick={() => setIsEditModalOpen(true)}>
+                                        Редактировать
+                                    </p>
+                                )}
+                                {(isAuthor || isAdmin) && (
+                                    <p className='actionButton' onClick={handleDelete}>
+                                        Удалить
+                                    </p>
+                                )}
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
+            )}
+
+            {isEditModalOpen && (
+                <EditAdModal
+                    ad={advObj}
+                    onClose={() => setIsEditModalOpen(false)}
+                />
             )}
         </>
     );

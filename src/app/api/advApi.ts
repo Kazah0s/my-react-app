@@ -12,7 +12,17 @@ export type AdvensData = {
 export const fetchAdvApi = async (advData: AdvensData) => {
   const response = await apiInstance.post('/users', advData);
   if (!response.data) {
-    throw new Error('Failed to fetch admin');
+    throw new Error('Failed to fetch advensed');
   }
   return response.data;
-};  
+};
+
+export const updateAdApi = async (advData: AdvensData) => {
+  const response = await apiInstance.put(`/ads/${advData.title}`, advData); // Используйте ID
+  return response.data;
+};
+
+export const deleteAdApi = async (title: string) => {
+  const response = await apiInstance.delete(`/ads/${title}`); // Используйте ID
+  return response.data;
+};

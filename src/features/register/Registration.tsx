@@ -51,9 +51,9 @@ const Registration: React.FC = () => {
     <div className="registration-container">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="registration-button"
+        className="menuButton registerButton"
       >
-        Зарегистрироваться
+        Войти
       </button>
 
       {isModalOpen && (

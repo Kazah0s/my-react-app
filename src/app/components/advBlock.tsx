@@ -13,7 +13,6 @@ function AdvBlock() {
 
     if (!currentUser.moderator) {
         userAds = ads.filter(element => element.isModer)
-
     } else userAds = ads
 
     return (

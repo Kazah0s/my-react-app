@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAdvRequest } from './slice';
+import { AdvState, fetchAdvRequest, updateAdRequest } from './slice';
 import { RootState } from '../../app/Store/store';
 import { AdvensData } from '../../app/api/advApi';
 
@@ -56,8 +56,6 @@ const AdvButton = () => {
       handleCloseModal();
     }
   };
-
-
 
   useEffect(() => {
     if (isModalOpen) {

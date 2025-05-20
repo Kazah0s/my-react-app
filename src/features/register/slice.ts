@@ -22,7 +22,7 @@ export const { actions, reducer } = createSlice({
       state.loading = true;
     },
     fetchRegisterSuccess: (state, action: PayloadAction<any>) => {
-      // state.data = action.payload;
+      state.data = action.payload;
       state.loading = false;
     },
     fetchRegisterFailure: (state, action: PayloadAction<string>) => {

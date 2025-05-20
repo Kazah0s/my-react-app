@@ -8,9 +8,9 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  username: "user",
+  username: "sam",
   password: "user",
-  moderator: false,
+  moderator: true,
   loading: false,
 };
 

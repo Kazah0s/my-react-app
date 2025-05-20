@@ -113,12 +113,8 @@ p {
   font-size: 0.9rem;
 }
 
-/* ==================== */
-/* Новые стили для регистрации */
-/* ==================== */
-
 .registration-container {
-  display: inline-block;
+  display: block;
 }
 
 .registration-button {
@@ -287,7 +283,6 @@ p {
   }
 }
 
-// Form Elements
 .form-group {
   margin-bottom: 1.25rem;
 
@@ -316,7 +311,6 @@ textarea {
   }
 }
 
-// Buttons
 .button-group {
   display: flex;
   justify-content: flex-end;
@@ -354,7 +348,6 @@ textarea {
   }
 }
 
-// Animations
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -399,7 +392,6 @@ textarea {
   }
 }
 
-// Responsive
 @media (max-width: 576px) {
 
   .modal,
@@ -524,27 +516,6 @@ textarea {
   animation: slideDown 0.3s ease-in forwards;
 }
 
-/* Адаптивность */
-@media (max-width: 576px) {
-  .adv-modal {
-    padding: 1.5rem;
-    width: 95%;
-  }
-
-  .adv-actions {
-    flex-direction: column;
-  }
-
-  .adv-submit-button,
-  .adv-cancel-button {
-    width: 100%;
-  }
-}
-
-/* ==================== */
-/* Стили для карточек объявлений */
-/* ==================== */
-
 .ann-card {
   border: 1px solid $border-color;
   border-radius: 8px;
@@ -605,7 +576,7 @@ textarea {
 
 .ann-description {
   margin: 0 0 10px;
-  color: $gray;
+  color: black;
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -615,7 +586,6 @@ textarea {
   font-size: 0.8rem;
 }
 
-/* Стили для развернутого просмотра */
 .ann-overlay {
   position: fixed;
   top: 0;
@@ -685,12 +655,30 @@ textarea {
 }
 
 .ann-expanded-date {
+  display: flex;
+  justify-content: space-between;
   color: $blue;
   font-size: 0.9rem;
   font-weight: bold;
 }
 
-/* Адаптивность */
+.subButtons {
+  display: flex;
+  justify-content: space-between;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+.actionButton {
+  margin-right: 0.7rem;
+  color: $gray;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
 @media (max-width: 1200px) {
   .ann-card {
     width: calc(33.33% - 20px);
@@ -763,6 +751,11 @@ textarea {
 
 .logoutButton {
   color: $red;
+  border-top: 1px solid $border-color;
+}
+
+.registerButton {
+  color: $green;
   border-top: 1px solid $border-color;
 }
 
@@ -928,7 +921,22 @@ textarea {
   }
 }
 
-/* Адаптивность */
+@media (max-width: 576px) {
+  .adv-modal {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .adv-actions {
+    flex-direction: column;
+  }
+
+  .adv-submit-button,
+  .adv-cancel-button {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .headerBtnBlock {
     gap: 10px;
@@ -962,5 +970,20 @@ textarea {
   margin: 5%;
   border: solid $gray 2px;
   padding: 16px;
+}
 
+.subButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.actionButton {
+  cursor: pointer;
+  color: $blue;
+  text-decoration: underline;
+
+  &:hover {
+    color: $blue, 10%;
+  }
 }

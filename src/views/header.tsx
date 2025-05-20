@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    const navigate = useNavigate();
 
     const currentUser = useSelector((state: RootState) => state.user)
 
@@ -17,16 +16,11 @@ const Header = () => {
     };
 
     const handleLogout = () => {
-
+        localStorage.removeItem('user');
+        location.reload();
 
         console.log("User logged out");
         setIsMenuOpen(false);
-    };
-
-    const goToUserAds = () => {
-        navigate('/my-ads');
-        setIsMenuOpen(false);
-
     };
 
     useEffect(() => {
@@ -45,8 +39,9 @@ const Header = () => {
     return (
         <div className="header">
             {/* <img src="" alt="logo" className="header-logo" /> */}
+            <h1>лого</h1>
             <div className="headerBtnBlock">
-                <Registration />
+
                 <div className="userBlock" ref={menuRef}>
                     <p
                         className="userName"
@@ -61,18 +56,9 @@ const Header = () => {
                             <div className="menuHeader">
                                 <span className="menuUserName">{currentUser.username ? currentUser.username : "User"}</span>
                             </div>
-                            <button
-                                className="menuButton"
-                                onClick={goToUserAds}
-                            >
-                                Мои объявления
-                            </button>
-                            <button
-                                className="menuButton logoutButton"
-                                onClick={handleLogout}
-                            >
-                                Выйти
-                            </button>
+                            <button className="menuButton logoutButton"
+                                onClick={handleLogout}> Выйти </button>
+                            <Registration />
                         </div>
                     )}
                 </div>

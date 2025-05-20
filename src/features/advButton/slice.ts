@@ -15,24 +15,24 @@ const initialState: AdvState[] = [
   {
     creatorName: 'sam',
     title: "1",
-    description: "",
-    eventDate: "",
+    description: "аахахахаххахах ххавххаоывд раоывфдар ывфа ывофрдалывфарвыфлдоардфы врарывфардывфарлыфвралыфвраыфрова",
+    eventDate: "123.2.1",
     imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
     isModer: false,
   },
   {
     creatorName: 'frank',
     title: "2",
-    description: "",
-    eventDate: "",
+    description: "аахахахаххахах ххавххаоывд раоывфдар ывфа ывофрдалывфарвыфлдоардфы врарывфардывфарлыфвралыфвраыфрова",
+    eventDate: "5.215.123",
     imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
     isModer: true,
   },
   {
     creatorName: 'dave',
     title: "3",
-    description: "",
-    eventDate: "",
+    description: "аахахахаххахах ххавххаоывд раоывфдар ывфа ывофрдалывфарвыфлдоардфы врарывфардывфарлыфвралыфвраыфрова",
+    eventDate: "2.13.21",
     imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
     isModer: false,
   }
@@ -45,15 +45,20 @@ export const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     fetchAdvRequest: (state, action: PayloadAction<AdvensData>) => {
-
     },
     fetchAdvSuccess: (state, action: PayloadAction<any>) => {
-
     },
     fetchAdvFailure: (state, action: PayloadAction<string>) => {
-
+    },
+    deleteAdRequest: (state, action: PayloadAction<string>) => {
+      return state.filter(ad => ad.title !== action.payload);
+    },
+    updateAdRequest: (state, action: PayloadAction<AdvState>) => {
+      return state.map(ad =>
+        ad.title === action.payload.title ? action.payload : ad
+      );
     },
   },
 });
 
-export const { fetchAdvRequest, fetchAdvSuccess, fetchAdvFailure } = actions;
+export const { fetchAdvRequest, fetchAdvSuccess, fetchAdvFailure, deleteAdRequest, updateAdRequest } = actions;
