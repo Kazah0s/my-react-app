@@ -1,6 +1,7 @@
 import { apiInstance } from "./axiosInstance";
 
 export type AdvensData = {
+  id: string;
   creatorName: string;
   title: string;
   description: string;

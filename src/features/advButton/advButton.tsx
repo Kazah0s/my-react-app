@@ -15,9 +15,11 @@ const AdvButton = () => {
     description: "",
     date: "",
     image: "",
+    id: "",
   });
 
   const [moder, setModer] = useState(false)
+  const currentUser = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
   // const data = useSelector((state: RootState) => state.adv.data);
@@ -30,25 +32,22 @@ const AdvButton = () => {
     }, 300);
   };
 
+  const [formData, setFormData] = useState<Omit<AdvState, 'id'>>({
+    creatorName: currentUser.username,
+    title: '',
+    description: '',
+    eventDate: '',
+    imageBase64: undefined,
+    isModer: currentUser.moderator
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const advData: AdvensData = {
-      creatorName: advState.creator,
-      isModer: moder,
-      title: advState.title,
-      description: advState.description,
-      eventDate: advState.date,
+      ...formData,
+      id: ''
     };
     dispatch(fetchAdvRequest(advData));
-    setAdvState({
-      creator: "",
-      title: "",
-      description: "",
-      date: "",
-      image: "",
-    })
-    setModer(false);
-    handleCloseModal();
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {

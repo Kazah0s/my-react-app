@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdvensData } from '../../app/api/advApi';
 
-
 export interface AdvState {
+  id: string;
   creatorName: string;
   title: string;
   description: string;
@@ -11,52 +11,35 @@ export interface AdvState {
   isModer: boolean;
 }
 
-const initialState: AdvState[] = [
-  {
-    creatorName: 'sam',
-    title: "1",
-    description: "аахахахаххахах ххавххаоывд раоывфдар ывфа ывофрдалывфарвыфлдоардфы врарывфардывфарлыфвралыфвраыфрова",
-    eventDate: "123.2.1",
-    imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
-    isModer: false,
-  },
-  {
-    creatorName: 'frank',
-    title: "2",
-    description: "аахахахаххахах ххавххаоывд раоывфдар ывфа ывофрдалывфарвыфлдоардфы врарывфардывфарлыфвралыфвраыфрова",
-    eventDate: "5.215.123",
-    imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
-    isModer: true,
-  },
-  {
-    creatorName: 'dave',
-    title: "3",
-    description: "аахахахаххахах ххавххаоывд раоывфдар ывфа ывофрдалывфарвыфлдоардфы врарывфардывфарлыфвралыфвраыфрова",
-    eventDate: "2.13.21",
-    imageBase64: "https://purr.objects-us-east-1.dream.io/i/8M3AW.jpg",
-    isModer: false,
-  }
-];
+interface AdvSliceState {
+  items: AdvState[];
+  loading: boolean;
+  error: string | null;
+}
 
-
+const initialState: AdvSliceState = {
+  items: [],
+  loading: false,
+  error: null
+};
 
 export const { actions, reducer } = createSlice({
   name: 'adv',
   initialState,
   reducers: {
     fetchAdvRequest: (state, action: PayloadAction<AdvensData>) => {
+      state.loading = true;
+      state.error = null;
     },
     fetchAdvSuccess: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.items.push(action.payload);
     },
     fetchAdvFailure: (state, action: PayloadAction<string>) => {
     },
     deleteAdRequest: (state, action: PayloadAction<string>) => {
-      return state.filter(ad => ad.title !== action.payload);
     },
     updateAdRequest: (state, action: PayloadAction<AdvState>) => {
-      return state.map(ad =>
-        ad.title === action.payload.title ? action.payload : ad
-      );
     },
   },
 });
