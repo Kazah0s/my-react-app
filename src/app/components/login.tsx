@@ -6,8 +6,8 @@ export interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({
-  username = 'dasdsa',
-  password = "ewq3s"
+  username = 'user',
+  password = "user"
 }) => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -22,15 +22,11 @@ const Login: React.FC<LoginProps> = ({
     }, 300);
   };
 
-
-
-
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       handleCloseModal();
     }
   };
-
 
   return (
     <>

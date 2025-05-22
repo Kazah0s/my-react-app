@@ -6,13 +6,13 @@ import { AdvState } from '../../features/advButton/slice';
 
 
 function AdvBlock() {
-    const ads = useSelector((state: RootState) => state.adv)
+    const ads = useSelector((state: RootState) => state.adv.items)
     const currentUser = useSelector((state: RootState) => state.user)
-    const myADS = ads.filter(element => element.creatorName === currentUser.username)
+    const myADS = ads.filter((element: { creatorName: string; }) => element.creatorName === currentUser.username)
     let userAds: AdvState[] = []
 
     if (!currentUser.moderator) {
-        userAds = ads.filter(element => element.isModer)
+        userAds = ads.filter((element: { isModer: any; }) => element.isModer)
     } else userAds = ads
 
     return (
@@ -25,7 +25,7 @@ function AdvBlock() {
             <div className='my'>
                 <h1>Мои события</h1>
                 <div className='myADV' id="myADV">
-                    {myADS.map(element => <Advertisement advObj={element} />)}
+                    {myADS.map((element: AdvState) => <Advertisement advObj={element} />)}
                 </div>
             </div>
         </div>
