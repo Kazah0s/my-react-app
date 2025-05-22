@@ -1,7 +1,6 @@
 import { apiInstance } from "./axiosInstance";
 
 export type AdvensData = {
-  id: string;
   creatorName: string;
   title: string;
   description: string;
@@ -11,7 +10,7 @@ export type AdvensData = {
 }
 
 export const fetchAdvApi = async (advData: AdvensData) => {
-  const response = await apiInstance.post('/users', advData);
+  const response = await apiInstance.post('/event/create', advData);
   if (!response.data) {
     throw new Error('Failed to fetch advensed');
   }
@@ -19,11 +18,16 @@ export const fetchAdvApi = async (advData: AdvensData) => {
 };
 
 export const updateAdApi = async (advData: AdvensData) => {
-  const response = await apiInstance.put(`/ads/${advData.title}`, advData); // Используйте ID
+  const response = await apiInstance.put('/update', advData);
+  return response.data;
+};
+
+export const updateStatusAdApi = async (advData: AdvensData) => {
+  const response = await apiInstance.put('/update-status', advData);
   return response.data;
 };
 
 export const deleteAdApi = async (title: string) => {
-  const response = await apiInstance.delete(`/ads/${title}`); // Используйте ID
+  const response = await apiInstance.delete('/event/delete/{eventId}'); // Используйте ID
   return response.data;
 };

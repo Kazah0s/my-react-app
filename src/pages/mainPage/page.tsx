@@ -12,7 +12,10 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(fetchUserRequest());
+    // dispatch()
   }, [dispatch]);
+
+
 
   if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error}</div>;

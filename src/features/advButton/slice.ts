@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdvensData } from '../../app/api/advApi';
 
 export interface AdvState {
-  id: string;
   creatorName: string;
   title: string;
   description: string;
@@ -12,13 +11,14 @@ export interface AdvState {
 }
 
 interface AdvSliceState {
-  items: AdvState[];
+  [x: string]: any;
+  data: AdvState[];
   loading: boolean;
   error: string | null;
 }
 
 const initialState: AdvSliceState = {
-  items: [],
+  data: [],
   loading: false,
   error: null
 };

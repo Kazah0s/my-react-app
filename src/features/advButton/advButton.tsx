@@ -15,7 +15,6 @@ const AdvButton = () => {
     description: "",
     date: "",
     image: "",
-    id: "",
   });
 
   const [moder, setModer] = useState(false)
@@ -45,7 +44,6 @@ const AdvButton = () => {
     e.preventDefault();
     const advData: AdvensData = {
       ...formData,
-      id: ''
     };
     dispatch(fetchAdvRequest(advData));
   };
