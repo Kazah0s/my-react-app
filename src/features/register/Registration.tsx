@@ -11,7 +11,7 @@ const Registration: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
-  const data = useSelector((state: RootState) => state.register.data)
+  // const {username, loading} = useSelector((state: RootState) => state.register);
 
   const handleButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

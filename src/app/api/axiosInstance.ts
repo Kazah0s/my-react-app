@@ -7,7 +7,7 @@ const baseURL = process.env.REACT_APP_API_BASE_URL;
 // Создаем инстанс Axios
 const axiosInstance = axios.create({
   baseURL, // Базовый URL
-  timeout: 30000, // Таймаут запроса (10 секунд)
+  timeout: 10000, // Таймаут запроса (10 секунд)
   headers: {
     'Content-Type': 'application/json'
   },

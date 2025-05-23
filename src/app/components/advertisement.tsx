@@ -28,13 +28,12 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const currentUser = useSelector((state: RootState) => state.user);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    // Проверка прав (как в AdvBlock)
     const isAuthor = advObj.creatorName === currentUser.username;
     const isAdmin = currentUser.moderator;
 
     const handleDelete = () => {
         if (window.confirm('Удалить объявление?')) {
-            dispatch(deleteAdRequest(advObj.title)); // Лучше использовать ID
+            dispatch(deleteAdRequest(advObj.title));
         }
     };
 

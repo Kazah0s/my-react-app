@@ -6,7 +6,7 @@ import { AdvState } from '../../features/advButton/slice';
 
 
 function AdvBlock() {
-    const ads = useSelector((state: RootState) => state.adv.items)
+    const ads = useSelector((state: RootState) => state.adv.data)
     const currentUser = useSelector((state: RootState) => state.user)
     const myADS = ads.filter((element: { creatorName: string; }) => element.creatorName === currentUser.username)
     let userAds: AdvState[] = []

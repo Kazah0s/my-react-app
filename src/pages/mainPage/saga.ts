@@ -9,7 +9,6 @@ function* fetchUserSaga() {
     const user: string = yield localStorage.getItem("user");
 
     if (user) {
-      console.log("if", user);
       const response: UsersData = yield JSON.parse(user)
       yield put(fetchUserSuccess(response));
       console.log(response.username);

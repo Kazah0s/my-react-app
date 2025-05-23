@@ -21,7 +21,7 @@ const AdvButton = () => {
   const currentUser = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
-  // const data = useSelector((state: RootState) => state.adv.data);
+  const data = useSelector((state: RootState) => state.adv.data);
 
   const handleCloseModal = () => {
     setIsClosing(true);

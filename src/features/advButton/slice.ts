@@ -28,12 +28,13 @@ export const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     fetchAdvRequest: (state, action: PayloadAction<AdvensData>) => {
+      state.item = action.payload
       state.loading = true;
       state.error = null;
     },
     fetchAdvSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.items.push(action.payload);
+      state.data.push(action.payload);
     },
     fetchAdvFailure: (state, action: PayloadAction<string>) => {
     },

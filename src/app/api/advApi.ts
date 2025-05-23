@@ -28,6 +28,6 @@ export const updateStatusAdApi = async (advData: AdvensData) => {
 };
 
 export const deleteAdApi = async (title: string) => {
-  const response = await apiInstance.delete('/event/delete/{eventId}'); // Используйте ID
+  const response = await apiInstance.delete('/event/delete/{eventId}');
   return response.data;
 };
