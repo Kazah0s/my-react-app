@@ -7,11 +7,10 @@ export interface AdvState {
   description: string;
   eventDate: string;
   imageBase64?: string;
-  isModer: boolean;
+  // isModer: boolean;
 }
 
 interface AdvSliceState {
-  [x: string]: any;
   data: AdvState[];
   loading: boolean;
   error: string | null;
@@ -28,7 +27,7 @@ export const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     fetchAdvRequest: (state, action: PayloadAction<AdvensData>) => {
-      state.item = action.payload
+      state.data.push(action.payload)
       state.loading = true;
       state.error = null;
     },

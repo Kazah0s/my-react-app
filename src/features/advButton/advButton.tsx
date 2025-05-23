@@ -7,21 +7,15 @@ import { AdvensData } from '../../app/api/advApi';
 const AdvButton = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState<boolean>(false);
-
-
-  const [advState, setAdvState] = useState({
-    creator: "",
-    title: "",
-    description: "",
-    date: "",
-    image: "",
-  });
-
-  const [moder, setModer] = useState(false)
+  // const [advState, setAdvState] = useState({
+  //   creator: "",
+  //   title: "",
+  //   description: "",
+  //   date: "",
+  //   image: "",
+  // });
   const currentUser = useSelector((state: RootState) => state.user);
-
   const dispatch = useDispatch();
-  const data = useSelector((state: RootState) => state.adv.data);
 
   const handleCloseModal = () => {
     setIsClosing(true);
@@ -31,13 +25,13 @@ const AdvButton = () => {
     }, 300);
   };
 
-  const [formData, setFormData] = useState<Omit<AdvState, 'id'>>({
+  const [formData, setFormData] = useState<AdvensData>({
     creatorName: currentUser.username,
     title: '',
     description: '',
     eventDate: '',
-    imageBase64: undefined,
-    isModer: currentUser.moderator
+    imageBase64: '',
+    // isModer: currentUser.moderator
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -102,8 +96,8 @@ const AdvButton = () => {
                 <input
                   type="text"
                   id="title"
-                  value={advState.title}
-                  onChange={(e) => setAdvState(prev => ({ ...prev, title: e.target.value }))}
+                  value={formData.title}
+                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                   className="adv-input"
                   required
                   placeholder="Краткий заголовок"
@@ -114,14 +108,14 @@ const AdvButton = () => {
                 <label htmlFor="description" className="adv-label">Описание</label>
                 <textarea
                   id="description"
-                  value={advState.description}
-                  onChange={(e) => setAdvState(prev => ({ ...prev, description: e.target.value }))}
+                  value={formData.description}
+                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                   className="adv-textarea"
                   required
                   maxLength={250}
                   placeholder="Подробное описание (максимум 250 символов)"
                 />
-                <span className="adv-counter">{advState.description.length}/250</span>
+                <span className="adv-counter">{formData.description.length}/250</span>
               </div>
 
               <div className="adv-form-group">
@@ -129,8 +123,8 @@ const AdvButton = () => {
                 <input
                   type="date"
                   id="date"
-                  value={advState.date}
-                  onChange={(e) => setAdvState(prev => ({ ...prev, date: e.target.value }))}
+                  value={formData.eventDate}
+                  onChange={(e) => setFormData(prev => ({ ...prev, eventDate: e.target.value }))}
                   className="adv-input"
                 />
               </div>
@@ -141,8 +135,8 @@ const AdvButton = () => {
                   type="url"
                   id="image"
                   placeholder="https://example.com/image.jpg"
-                  value={advState.image}
-                  onChange={(e) => setAdvState(prev => ({ ...prev, image: e.target.value }))}
+                  value={formData.imageBase64}
+                  onChange={(e) => setFormData(prev => ({ ...prev, imageBase64: e.target.value }))}
                   className="adv-input"
                 />
               </div>

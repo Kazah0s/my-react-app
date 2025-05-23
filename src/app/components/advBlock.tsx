@@ -12,7 +12,7 @@ function AdvBlock() {
     let userAds: AdvState[] = []
 
     if (!currentUser.moderator) {
-        userAds = ads.filter((element: { isModer: any; }) => element.isModer)
+        // userAds = ads.filter((element: { isModer: any; }) => element.isModer)
     } else userAds = ads
 
     return (

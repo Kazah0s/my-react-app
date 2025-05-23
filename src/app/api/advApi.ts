@@ -6,11 +6,15 @@ export type AdvensData = {
   description: string;
   eventDate: string;
   imageBase64?: string;
-  isModer: boolean;
+  // isModer: boolean;
 }
 
 export const fetchAdvApi = async (advData: AdvensData) => {
-  const response = await apiInstance.post('/event/create', advData);
+  const response = await apiInstance.post(
+    '/event/create', 
+    advData,
+    { withCredentials: true }
+  );
   if (!response.data) {
     throw new Error('Failed to fetch advensed');
   }

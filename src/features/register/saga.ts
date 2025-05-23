@@ -5,14 +5,15 @@ import { Axios, AxiosResponse } from 'axios';
 
 function* fetchRegisterSaga({ payload }: ReturnType<typeof fetchRegisterRequest>) {
   try {
-    const register: AxiosResponse<boolean> = yield call(fetchRegisterApi, payload);
+    const register: AxiosResponse<{isAdmin: boolean, SessionId: string}> = yield call(fetchRegisterApi, payload);
     yield localStorage.setItem("user", JSON.stringify(register));
-    console.log(register);
+    console.log(register.headers);
     
     if (register.status === 200) {
+      document.cookie = register.data.SessionId;
       yield put(fetchRegisterSuccess({
         username: payload.username,
-        isModer: register.data,
+        isModer: register.data.isAdmin,
       }));
     }
   } catch (error: any) {

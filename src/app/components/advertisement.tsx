@@ -14,7 +14,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
         description = "",
         eventDate = "",
         imageBase64 = "",
-        isModer = false,
+        // isModer = false,
     } = advObj;
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -42,7 +42,9 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     return (
         <>
             <div
-                className={isModer == false ? "ann-card-notModer" : "ann-card"}
+                className={
+                    // isModer == false ? "ann-card-notModer" : 
+                    "ann-card"}
                 onClick={() => setIsExpanded(true)}
             >
                 <h3 className="ann-theme">{title} {creatorName}</h3>
