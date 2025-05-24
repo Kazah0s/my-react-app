@@ -10,7 +10,7 @@ interface RegisterState {
 }
 
 const initialState: RegisterState = {
-  username: "",
+  username: "user",
   moderator: false,
 
   loading: false,

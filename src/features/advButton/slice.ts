@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdvensData } from '../../app/api/advApi';
 
 export interface AdvState {
+  eventId: number;
   creatorName: string;
   title: string;
   description: string;
   eventDate: string;
-  imageBase64?: string;
+  imageLink: string | null;
   // isModer: boolean;
 }
 
@@ -33,15 +34,21 @@ export const { actions, reducer } = createSlice({
     },
     fetchAdvSuccess: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.data.push(action.payload);
+      state.data = action.payload;
     },
     fetchAdvFailure: (state, action: PayloadAction<string>) => {
+
     },
     deleteAdRequest: (state, action: PayloadAction<string>) => {
+    
     },
-    updateAdRequest: (state, action: PayloadAction<AdvState>) => {
+    updateAdRequest: (state, action: PayloadAction<AdvensData>) => {
+    state.data.push(action.payload)
     },
+    updateStatusAdRequest: (state, action: PayloadAction<AdvensData>) => {
+      state.data.push(action.payload)
+      },
   },
 });
 
-export const { fetchAdvRequest, fetchAdvSuccess, fetchAdvFailure, deleteAdRequest, updateAdRequest } = actions;
+export const { fetchAdvRequest, fetchAdvSuccess, fetchAdvFailure, deleteAdRequest, updateAdRequest, updateStatusAdRequest } = actions;

@@ -26,11 +26,12 @@ const AdvButton = () => {
   };
 
   const [formData, setFormData] = useState<AdvensData>({
+    eventId: 0,
     creatorName: currentUser.username,
     title: '',
     description: '',
     eventDate: '',
-    imageBase64: '',
+    imageLink: '',
     // isModer: currentUser.moderator
   });
 
@@ -135,8 +136,8 @@ const AdvButton = () => {
                   type="url"
                   id="image"
                   placeholder="https://example.com/image.jpg"
-                  value={formData.imageBase64}
-                  onChange={(e) => setFormData(prev => ({ ...prev, imageBase64: e.target.value }))}
+                  // value={formData.imageLink}
+                  onChange={(e) => setFormData(prev => ({ ...prev, imageLink: e.target.value }))}
                   className="adv-input"
                 />
               </div>
