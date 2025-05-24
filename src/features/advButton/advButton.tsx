@@ -30,7 +30,7 @@ const AdvButton = () => {
     title: '',
     description: '',
     eventDate: '',
-    imageBase64: '',
+    ImageLink: '',
     // isModer: currentUser.moderator
   });
 
@@ -135,8 +135,8 @@ const AdvButton = () => {
                   type="url"
                   id="image"
                   placeholder="https://example.com/image.jpg"
-                  value={formData.imageBase64}
-                  onChange={(e) => setFormData(prev => ({ ...prev, imageBase64: e.target.value }))}
+                  value={formData.ImageLink}
+                  onChange={(e) => setFormData(prev => ({ ...prev, ImageLink: e.target.value }))}
                   className="adv-input"
                 />
               </div>

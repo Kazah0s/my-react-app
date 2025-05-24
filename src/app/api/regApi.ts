@@ -12,7 +12,9 @@ export type RegisterRecievedData = {
 }
 
 export const fetchRegisterApi = async (regData: RegisterRawData) => {
-  const response = await apiInstance.post('/auth/login', regData);
+  const response = await apiInstance.post('/auth/login', { regData }, {
+    withCredentials: true
+  });
   if (!response.data) {
     throw new Error('Failed to fetch regist');
   }

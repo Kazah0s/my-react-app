@@ -13,7 +13,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
         title = "",
         description = "",
         eventDate = "",
-        imageBase64 = "",
+        ImageLink = "",
         // isModer = false,
     } = advObj;
 
@@ -48,10 +48,10 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                 onClick={() => setIsExpanded(true)}
             >
                 <h3 className="ann-theme">{title} {creatorName}</h3>
-                {imageBase64 && (
+                {ImageLink && (
                     <div className="ann-image-container">
                         <img
-                            src={imageBase64}
+                            src={ImageLink}
                             alt={title}
                             className="ann-image"
                         />
@@ -71,10 +71,10 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                             &times;
                         </button>
                         <h2 className="ann-expanded-theme">{title}</h2>
-                        {imageBase64 && (
+                        {ImageLink && (
                             <div className="ann-expanded-image-container">
                                 <img
-                                    src={imageBase64}
+                                    src={ImageLink}
                                     alt={title}
                                     className="ann-expanded-image"
                                 />

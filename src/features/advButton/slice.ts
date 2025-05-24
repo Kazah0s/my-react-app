@@ -6,7 +6,7 @@ export interface AdvState {
   title: string;
   description: string;
   eventDate: string;
-  imageBase64?: string;
+  ImageLink: string;
   // isModer: boolean;
 }
 

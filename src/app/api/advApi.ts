@@ -5,13 +5,13 @@ export type AdvensData = {
   title: string;
   description: string;
   eventDate: string;
-  imageBase64?: string;
+  ImageLink: string;
   // isModer: boolean;
 }
 
 export const fetchAdvApi = async (advData: AdvensData) => {
   const response = await apiInstance.post(
-    '/event/create', 
+    '/event/create',
     advData,
     { withCredentials: true }
   );
