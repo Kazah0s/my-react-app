@@ -1,21 +1,22 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { fetchUserSuccess, fetchUserFailure, fetchUserRequest } from './slice';
+import { fetchUserSuccess, fetchUserFailure, fetchUserRequest } from './sliceLog';
 import { fetchUserApi, UsersData } from '../../app/api/userApi';
 import { AxiosResponse } from 'axios';
 
 function* fetchUserSaga() {
   try {
     const user: string = yield localStorage.getItem("user");
-
     if (user) {
       const response: UsersData = yield JSON.parse(user)
       yield put(fetchUserSuccess(response));
+
       console.log(response.username);
 
     } else {
       const response: AxiosResponse<UsersData> = yield call(fetchUserApi);
       yield put(fetchUserSuccess(response.data));
+
       console.log("saga", response.data);
 
     }

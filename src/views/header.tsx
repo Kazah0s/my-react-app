@@ -3,6 +3,7 @@ import { RootState } from "../app/Store/store";
 import React, { useState, useRef, useEffect } from "react";
 import Registration from '../features/register/Registration';
 import { useNavigate } from 'react-router-dom';
+// import LogoKCT from '../assets/LogoKCT.png'
 
 
 const Header = () => {
@@ -38,8 +39,7 @@ const Header = () => {
 
     return (
         <div className="header">
-            {/* <img src="" alt="logo" className="header-logo" /> */}
-            <h1>лого</h1>
+            <img src="https://it-college.ru/images/Logo5.png" alt="logo" className="header-logo" />
             <div className="headerBtnBlock">
 
                 <div className="userBlock" ref={menuRef}>
@@ -58,6 +58,7 @@ const Header = () => {
                             </div>
                             <button className="menuButton logoutButton"
                                 onClick={handleLogout}> Выйти </button>
+                            <Registration />
                             <Registration />
                         </div>
                     )}

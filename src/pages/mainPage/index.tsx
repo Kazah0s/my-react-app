@@ -1,6 +1,6 @@
 import { } from 'dotenv'
 import MainPage from './page';
-import {watchFetchUser} from './saga'
-import {actions, reducer} from './slice'
+import {watchFetchUser} from './sagaLog'
+import {actions, reducer} from './sliceLog'
 
 export {MainPage, watchFetchUser, actions, reducer};

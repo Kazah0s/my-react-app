@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-// Color Variables
-$gray: #999999;
-$dark-gray: #333333;
-$blue: #0086e4;
-$purple: #9605ca;
-$green: #4caf50;
-$red: #d40a0a;
+// Фиолетово-белая цветовая палитра
+$gray: #e0e0e0; // Светло-серый вместо темного
+$dark-gray: #4a4a4a; // Менее контрастный серый
+$blue: #7e57c2; // Фиолетовый оттенок вместо синего
+$purple: #673ab7; // Более насыщенный фиолетовый
+$green: #9c27b0; // Фиолетовый вместо зеленого
+$red: #e91e63; // Розово-фиолетовый вместо красного
 
-$primary-color: $blue;
-$secondary-color: $purple;
-$border-color: #dddddd;
+$primary-color: $purple; // Основной цвет - фиолетовый
+$secondary-color: #5e35b1; // Дополнительный фиолетовый
+$border-color: #d1c4e9; // Светло-фиолетовый для границ
 
 // Font
 $primary-font: 'Lato', sans-serif;
@@ -20,6 +20,7 @@ body {
   font-size: 1rem;
   font-family: $primary-font;
   margin: 0;
+  background-color: #fafafa; // Светлый фон
 }
 
 h1,
@@ -35,7 +36,7 @@ p {
 
 // Header Styles
 .header {
-  background-color: $secondary-color;
+  background-color: $primary-color; // Фиолетовый фон хедера
   padding: 1rem;
   margin: 0;
   display: flex;
@@ -43,11 +44,13 @@ p {
   align-items: center;
   position: relative;
   z-index: 100;
+  color: white; // Белый текст на фиолетовом фоне
 }
 
 .header-logo {
   height: 40px;
   width: auto;
+  filter: brightness(0) invert(1); // Делаем лого белым
 }
 
 .headerBtnBlock {
@@ -64,7 +67,7 @@ p {
 
 // Navigation
 .navBar {
-  background-color: #ccc;
+  background-color: #d1c4e9; // Светло-фиолетовый фон навигации
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -77,22 +80,23 @@ p {
 }
 
 .ann {
-  border: solid 2px $gray;
+  border: solid 2px $border-color; // Светло-фиолетовая граница
   border-radius: 20px;
   margin: 1rem;
   padding: 1rem;
   max-width: 16rem;
   max-height: 20rem;
   transition: transform 0.2s, box-shadow 0.2s;
+  background-color: white;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba($purple, 0.1); // Фиолетовая тень
   }
 }
 
 .annHeader {
-  border-bottom: solid 2px $gray;
+  border-bottom: solid 2px $border-color;
   padding: 1rem;
   margin: 0;
   font-size: 1rem;
@@ -119,7 +123,7 @@ p {
 
 .registration-button {
   padding: 10px 20px;
-  background-color: $green;
+  background-color: $green; // Фиолетовый вместо зеленого
   color: white;
   border: none;
   border-radius: 4px;
@@ -128,7 +132,7 @@ p {
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: $green, #000, 85%;
+    background-color: #b23bb5;
   }
 }
 
@@ -170,7 +174,8 @@ p {
 
 .registration-input {
   @extend input;
-  max-width: 93%
+  max-width: 93%;
+  border-color: $border-color;
 }
 
 .registration-button-group {
@@ -179,9 +184,10 @@ p {
 
 .registration-submit-button {
   @extend .submit-button;
+  background-color: $purple; // Фиолетовая кнопка
 
   &:hover:not(:disabled) {
-    background-color: $green, #000, 85%;
+    background-color: #7c4dff;
   }
 
   &:disabled {
@@ -192,9 +198,10 @@ p {
 
 .registration-cancel-button {
   @extend .cancel-button;
+  background-color: $red; // Розово-фиолетовый
 
   &:hover {
-    background-color: $red, #000, 85%;
+    background-color: #ec407a;
   }
 }
 
@@ -205,13 +212,13 @@ p {
   border-radius: 4px;
 
   &.success {
-    background-color: #dff0d8;
-    color: #3c763d;
+    background-color: #f3e5f5; // Светло-фиолетовый
+    color: #7b1fa2; // Темно-фиолетовый
   }
 
   &.error {
-    background-color: #f2dede;
-    color: #a94442;
+    background-color: #fce4ec; // Светло-розовый
+    color: #c2185b; // Темно-розовый
   }
 }
 
@@ -249,7 +256,7 @@ p {
   border-radius: 12px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba($purple, 0.1); // Фиолетовый оттенок тени
   position: relative;
 
   &.slideUp {
@@ -279,7 +286,7 @@ p {
   transition: color 0.2s;
 
   &:hover {
-    color: $dark-gray;
+    color: $purple; // Фиолетовый при наведении
   }
 }
 
@@ -306,8 +313,8 @@ textarea {
 
   &:focus {
     outline: none;
-    border-color: $primary-color;
-    box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+    border-color: $purple; // Фиолетовая граница при фокусе
+    box-shadow: 0 0 0 2px rgba($purple, 0.1);
   }
 }
 
@@ -320,7 +327,7 @@ textarea {
 
 .submit-button {
   padding: 0.75rem 1.5rem;
-  background-color: $green;
+  background-color: $purple; // Фиолетовая кнопка
   color: white;
   border: none;
   border-radius: 8px;
@@ -330,7 +337,7 @@ textarea {
   transition: background-color 0.2s, transform 0.2s;
 
   &:hover {
-    background-color: $green, #000, 85%;
+    background-color: #7c4dff;
     transform: translateY(-1px);
   }
 
@@ -341,10 +348,10 @@ textarea {
 
 .cancel-button {
   @extend .submit-button;
-  background-color: $red;
+  background-color: $red; // Розово-фиолетовый
 
   &:hover {
-    background-color: $red, #000, 85%;
+    background-color: #ec407a;
   }
 }
 
@@ -419,7 +426,7 @@ textarea {
 
 .adv-trigger-button {
   padding: 10px 20px;
-  background-color: $green;
+  background-color: $purple; // Фиолетовый вместо зеленого
   color: white;
   border: none;
   border-radius: 4px;
@@ -428,7 +435,7 @@ textarea {
   transition: all 0.3s;
 
   &:hover {
-    background-color: $green, #000, 85%;
+    background-color: #7c4dff;
     transform: translateY(-1px);
   }
 }
@@ -472,6 +479,7 @@ textarea {
 .adv-textarea {
   @extend input;
   max-width: 93%;
+  border-color: $border-color;
 }
 
 .adv-textarea {
@@ -529,7 +537,7 @@ textarea {
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba($purple, 0.1); // Фиолетовая тень
   }
 }
 
@@ -541,11 +549,11 @@ textarea {
   width: calc(25% - 20px);
   box-sizing: border-box;
   cursor: pointer;
-  background-color: $gray;
+  background-color: #f3e5f5; // Светло-фиолетовый фон для немодерируемых
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba($purple, 0.1);
   }
 }
 
@@ -576,13 +584,13 @@ textarea {
 
 .ann-description {
   margin: 0 0 10px;
-  color: black;
+  color: $dark-gray;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
 .ann-date {
-  color: $blue;
+  color: $purple; // Фиолетовый вместо синего
   font-size: 0.8rem;
 }
 
@@ -623,7 +631,7 @@ textarea {
   color: $gray;
 
   &:hover {
-    color: $dark-gray;
+    color: $purple; // Фиолетовый при наведении
   }
 }
 
@@ -657,7 +665,7 @@ textarea {
 .ann-expanded-date {
   display: flex;
   justify-content: space-between;
-  color: $blue;
+  color: $purple; // Фиолетовый вместо синего
   font-size: 0.9rem;
   font-weight: bold;
 }
@@ -667,7 +675,7 @@ textarea {
   justify-content: space-between;
 
   &:hover {
-    color: $blue;
+    color: $purple; // Фиолетовый вместо синего
   }
 }
 
@@ -676,7 +684,11 @@ textarea {
   color: $gray;
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.2s;
 
+  &:hover {
+    color: $purple; // Фиолетовый при наведении
+  }
 }
 
 @media (max-width: 1200px) {
@@ -708,6 +720,7 @@ textarea {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   transition: background-color 0.3s;
+  color: white;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
@@ -720,7 +733,7 @@ textarea {
   top: 100%;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba($purple, 0.15); // Фиолетовый оттенок тени
   min-width: 200px;
   overflow: hidden;
   z-index: 101;
@@ -729,7 +742,7 @@ textarea {
 
 .menuHeader {
   padding: 12px 16px;
-  background-color: $primary-color;
+  background-color: $purple; // Фиолетовый фон
   color: white;
   font-weight: bold;
 }
@@ -743,9 +756,10 @@ textarea {
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
+  color: $dark-gray;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: #f3e5f5; // Светло-фиолетовый при наведении
   }
 }
 
@@ -755,7 +769,7 @@ textarea {
 }
 
 .registerButton {
-  color: $green;
+  color: $purple; // Фиолетовый вместо зеленого
   border-top: 1px solid $border-color;
 }
 
@@ -795,17 +809,22 @@ textarea {
 
   input {
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid $border-color;
     border-radius: 4px;
   }
 
   button {
     padding: 8px 16px;
-    background-color: #4CAF50;
+    background-color: $purple; // Фиолетовая кнопка
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #7c4dff;
+    }
   }
 }
 
@@ -816,139 +835,21 @@ textarea {
 
   .username {
     font-weight: bold;
-    color: #333;
+    color: white; // Белый текст в хедере
   }
 
   .logout-button {
     padding: 6px 12px;
-    background-color: #f44336;
+    background-color: $red;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-}
+    transition: background-color 0.2s;
 
-.header {
-  background-color: $secondary-color;
-  padding: 1rem;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 100;
-}
-
-.header-logo {
-  height: 40px;
-  width: auto;
-}
-
-.headerBtnBlock {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.userBlock {
-  position: relative;
-  margin: 0.2rem;
-}
-
-.userName {
-  margin: 0;
-  padding: 8px 12px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-}
-
-.userMenu {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 200px;
-  overflow: hidden;
-  z-index: 101;
-  animation: fadeIn 0.2s ease-out;
-}
-
-.menuHeader {
-  padding: 12px 16px;
-  background-color: $primary-color;
-  color: white;
-  font-weight: bold;
-}
-
-.menuButton {
-  display: block;
-  width: 100%;
-  padding: 12px 16px;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #f5f5f5;
-  }
-}
-
-.logoutButton {
-  color: $red;
-  border-top: 1px solid $border-color;
-}
-
-/* Анимация появления меню */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 576px) {
-  .adv-modal {
-    padding: 1.5rem;
-    width: 95%;
-  }
-
-  .adv-actions {
-    flex-direction: column;
-  }
-
-  .adv-submit-button,
-  .adv-cancel-button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .headerBtnBlock {
-    gap: 10px;
-  }
-
-  .userName {
-    padding: 6px 10px;
-    font-size: 0.9rem;
-  }
-
-  .userMenu {
-    min-width: 180px;
+    &:hover {
+      background-color: #ec407a;
+    }
   }
 }
 
@@ -968,8 +869,10 @@ textarea {
 
 .my {
   margin: 5%;
-  border: solid $gray 2px;
+  border: solid $border-color 2px;
   padding: 16px;
+  border-radius: 8px;
+  background-color: white;
 }
 
 .subButtons {
@@ -980,10 +883,27 @@ textarea {
 
 .actionButton {
   cursor: pointer;
-  color: $blue;
+  color: $purple; // Фиолетовые ссылки
   text-decoration: underline;
+  transition: color 0.2s;
 
   &:hover {
-    color: $blue, 10%;
+    color: #7c4dff;
+  }
+}
+
+@media (max-width: 576px) {
+  .adv-modal {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .adv-actions {
+    flex-direction: column;
+  }
+
+  .adv-submit-button,
+  .adv-cancel-button {
+    width: 100%;
   }
 }

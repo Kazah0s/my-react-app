@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdvState, deleteAdRequest, updateAdRequest } from '../../features/advButton/slice';
+import { AdvState, deleteAdRequest, updateAdRequest, updateStatusAdRequest } from '../../features/advButton/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Store/store';
 import { EditAdModal } from '../../features/EditAdModal';
@@ -9,20 +9,17 @@ interface AdvertisementProps {
 }
 const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const {
+        eventId = "",
         creatorName = "",
         title = "",
         description = "",
         eventDate = "",
-        ImageLink = "",
+        imageLink = "",
         // isModer = false,
     } = advObj;
 
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
-
-
-
-
 
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootState) => state.user);
@@ -38,6 +35,25 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     };
 
 
+    const ApprovedModal = ({
+        ad,
+        onClose
+    }: {
+        ad: AdvState;
+        onClose: () => void
+    }) => {
+        const [approvedAd, setApprovedAd] = useState(ad)
+
+        const Approved = () => {
+            if (window.confirm('Удалить объявление?')) {
+                dispatch(updateStatusAdRequest(approvedAd));
+            }
+        }
+    }
+
+
+
+
 
     return (
         <>
@@ -48,10 +64,10 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                 onClick={() => setIsExpanded(true)}
             >
                 <h3 className="ann-theme">{title} {creatorName}</h3>
-                {ImageLink && (
+                {imageLink && (
                     <div className="ann-image-container">
                         <img
-                            src={ImageLink}
+                            src={imageLink}
                             alt={title}
                             className="ann-image"
                         />
@@ -71,10 +87,10 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                             &times;
                         </button>
                         <h2 className="ann-expanded-theme">{title}</h2>
-                        {ImageLink && (
+                        {imageLink && (
                             <div className="ann-expanded-image-container">
                                 <img
-                                    src={ImageLink}
+                                    src={imageLink}
                                     alt={title}
                                     className="ann-expanded-image"
                                 />
@@ -87,7 +103,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
 
 
                             <div className='subButtons'>
-                                {isAuthor && (
+                                {(
                                     <p className='actionButton' onClick={() => setIsEditModalOpen(true)}>
                                         Редактировать
                                     </p>
@@ -96,6 +112,13 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                                     <p className='actionButton' onClick={handleDelete}>
                                         Удалить
                                     </p>
+                                )}
+                                {(isAdmin && (
+                                    <button className='actionButton' onClick={() => ApprovedModal}>
+                                        appruvd
+                                    </button>
+                                )
+
                                 )}
                             </div>
 

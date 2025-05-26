@@ -45,8 +45,8 @@ export const EditAdModal = ({
           />
 
           <input
-            value={editedAd.ImageLink}
-            onChange={(e) => setEditedAd({ ...editedAd, ImageLink: e.target.value })}
+            // value={editedAd.imageLink}
+            onChange={(e) => setEditedAd({ ...editedAd, imageLink: e.target.value })}
           />
 
 
