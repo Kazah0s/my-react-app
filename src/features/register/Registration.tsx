@@ -53,7 +53,7 @@ const Registration: React.FC = () => {
         onClick={() => setIsModalOpen(true)}
         className="menuButton registerButton"
       >
-        Войти
+        Зарегистрироваться
       </button>
 
       {isModalOpen && (
@@ -82,6 +82,17 @@ const Registration: React.FC = () => {
 
               <div className="registration-form-group">
                 <label className="registration-label">Пароль:</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="registration-input"
+                  required
+                />
+              </div>
+
+              <div className="registration-form-group">
+                <label className="registration-label">Повторите пароль:</label>
                 <input
                   type="password"
                   value={password}

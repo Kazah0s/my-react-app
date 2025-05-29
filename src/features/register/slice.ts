@@ -24,9 +24,9 @@ export const { actions, reducer } = createSlice({
     fetchRegisterRequest: (state, action: PayloadAction<RegisterRawData>) => {
       state.loading = true;
     },
-    fetchRegisterSuccess: (state, action: PayloadAction<{username: string, isModer: boolean}>) => {
+    fetchRegisterSuccess: (state, action: PayloadAction<{ username: string, isModer: boolean }>) => {
       state.loading = false;
-      
+
       state.username = action.payload.username
       state.moderator = action.payload.isModer
     },

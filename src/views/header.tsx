@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/Store/store";
 import React, { useState, useRef, useEffect } from "react";
 import Registration from '../features/register/Registration';
+import Login from "../features/login/login";
 import { useNavigate } from 'react-router-dom';
 // import LogoKCT from '../assets/LogoKCT.png'
 
@@ -59,7 +60,7 @@ const Header = () => {
                             <button className="menuButton logoutButton"
                                 onClick={handleLogout}> Выйти </button>
                             <Registration />
-                            <Registration />
+                            <Login />
                         </div>
                     )}
                 </div>
