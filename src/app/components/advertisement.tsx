@@ -51,10 +51,6 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
         }
     }
 
-
-
-
-
     return (
         <>
             <div
@@ -115,10 +111,9 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                                 )}
                                 {(isAdmin && (
                                     <button className='actionButton' onClick={() => ApprovedModal}>
-                                        appruvd
+                                        Appruvd
                                     </button>
                                 )
-
                                 )}
                             </div>
 

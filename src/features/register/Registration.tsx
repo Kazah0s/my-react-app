@@ -113,6 +113,7 @@ const Registration: React.FC = () => {
                 <button
                   className="registration-submit-button"
                   type="submit"
+                  onClick={handleCloseModal}
                 >
                   Зарегистрироваться
                 </button>

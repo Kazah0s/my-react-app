@@ -153,10 +153,11 @@ const AdvButton = () => {
                 <button
                   type="submit"
                   className="adv-submit-button"
+                  onClick={handleCloseModal}
                 >
                   Опубликовать
                 </button>
-              </div>
+              </div>Ф
             </form>
           </div>
         </div>
