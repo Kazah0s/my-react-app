@@ -157,7 +157,7 @@ const AdvButton = () => {
                 >
                   Опубликовать
                 </button>
-              </div>Ф
+              </div>
             </form>
           </div>
         </div>

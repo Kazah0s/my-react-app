@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { AdvState, deleteAdRequest, updateAdRequest, updateStatusAdRequest } from '../../features/advButton/slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../Store/store';
+
 import { EditAdModal } from '../../features/EditAdModal';
+import { RootState } from '@/app/Store/store';
+import { fetchSignAdv } from './slice';
+import { Root } from 'react-dom/client';
 
 interface AdvertisementProps {
     advObj: AdvState;
 }
 const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const {
-        eventId = "",
+        // eventId = "",
         creatorName = "",
         title = "",
         description = "",
@@ -17,6 +20,8 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
         imageLink = "",
         // isModer = false,
     } = advObj;
+
+
 
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
@@ -49,6 +54,13 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                 dispatch(updateStatusAdRequest(approvedAd));
             }
         }
+    }
+
+    const handleButtonClick = () => {
+        const Advs = useSelector((state: RootState) => state.adv.data)
+        const eventid = Advs.find(a => a.title === title)?.eventId
+
+        if (eventid) { dispatch(fetchSignAdv(eventid)) }
     }
 
     return (
@@ -112,6 +124,12 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                                 {(isAdmin && (
                                     <button className='actionButton' onClick={() => ApprovedModal}>
                                         Appruvd
+                                    </button>
+                                )
+                                )}
+                                {(!isAdmin && (
+                                    <button className='actionButton' onClick={() => handleButtonClick}>
+                                        Записаться
                                     </button>
                                 )
                                 )}

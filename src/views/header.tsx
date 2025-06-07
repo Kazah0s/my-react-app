@@ -49,18 +49,20 @@ const Header = () => {
                         onClick={toggleMenu}
                         style={{ cursor: 'pointer' }}
                     >
-                        {currentUser.username ? currentUser.username : "UserName"}
+                        {currentUser.username ? currentUser.username : "Меню"}
                     </p>
 
                     {isMenuOpen && (
                         <div className="userMenu">
+
                             <div className="menuHeader">
-                                <span className="menuUserName">{currentUser.username ? currentUser.username : "User"}</span>
+                                <span className="menuUserName">{currentUser.username ? currentUser.username : "UserName"}</span>
                             </div>
-                            <button className="menuButton logoutButton"
-                                onClick={handleLogout}> Выйти </button>
-                            <Registration />
-                            <Login />
+
+                            {currentUser.username
+                                ? <button className="menuButton logoutButton" onClick={handleLogout}> Выйти </button>
+                                : <><Registration /> <Login /></>
+                            }
                         </div>
                     )}
                 </div>

@@ -7,10 +7,15 @@ interface UserState {
   loading: boolean;
 }
 
+interface IUser {
+  username: string,
+  isModer: boolean
+}
+
 const initialState: UserState = {
-  username: "user",
-  password: "user",
-  moderator: true,
+  username: "",
+  password: "",
+  moderator: false,
   loading: false,
 };
 
@@ -21,21 +26,17 @@ export const { actions, reducer } = createSlice({
     fetchUserRequest: (state) => {
       state.loading = true;
     },
-    fetchUserSuccess: (state, action: PayloadAction<any>) => {
+    fetchUserSuccess: (state, action: PayloadAction<IUser>) => {
       state.username = action.payload.username
-      state.password = action.payload.password
-      state.moderator = action.payload.moderator
+      state.moderator = action.payload.isModer
 
       state.loading = false
-    },
-    fetchUserFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-    },
+    }
   },
 });
 
 console.log(initialState)
 
-export const { fetchUserRequest, fetchUserSuccess, fetchUserFailure } = actions;
+export const { fetchUserRequest, fetchUserSuccess } = actions;
 // export default userSlice.reducer;
 

@@ -1,12 +1,7 @@
 import { apiInstance } from "./axiosInstance";
 
-export type UsersData = {
-  username: string,
-  password: string
-}
-
 export const fetchUserApi = async () => {
-  const response = await apiInstance.get('/event/get/all', {
+  const response = await apiInstance.get('/', {
     withCredentials: true
   });
   if (!response.data) {

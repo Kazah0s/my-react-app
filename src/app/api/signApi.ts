@@ -1,11 +1,7 @@
 import { apiInstance } from "./axiosInstance";
 
-export type IDKdata = {
-
-}
-
-export const fetchSignApi = async () => {
-  const response = await apiInstance.post('/', { withCredentials: true });
+export const fetchSignApi = async (eventId: number) => {
+  const response = await apiInstance.post('/', eventId, { withCredentials: true });
   if (!response.data) {
     throw new Error('Failed to fetch Sing Up!');
   }

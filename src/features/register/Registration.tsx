@@ -9,12 +9,18 @@ const Registration: React.FC = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
 
   const dispatch = useDispatch();
   // const {username, loading} = useSelector((state: RootState) => state.register);
 
   const handleButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (password !== confirm) {
+      alert("Пароли не совпадают")
+      setConfirm("")
+      return
+    }
     const registerData = {
       username: username,
       password: password
@@ -95,8 +101,8 @@ const Registration: React.FC = () => {
                 <label className="registration-label">Повторите пароль:</label>
                 <input
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
                   className="registration-input"
                   required
                 />
@@ -113,7 +119,6 @@ const Registration: React.FC = () => {
                 <button
                   className="registration-submit-button"
                   type="submit"
-                  onClick={handleCloseModal}
                 >
                   Зарегистрироваться
                 </button>

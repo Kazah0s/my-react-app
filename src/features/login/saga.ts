@@ -2,6 +2,7 @@ import { takeEvery, call, put, take } from 'redux-saga/effects';
 import { fetchLoginSuccess, fetchLoginFailure, fetchLoginRequest } from './slice';
 import { fetchLoginApi, RegisterRecievedData } from '../../app/api/regApi';
 import { Axios, AxiosResponse } from 'axios';
+import { fetchUserSuccess } from '@/pages/mainPage/sliceLog';
 
 function* fetchLoginSaga({ payload }: ReturnType<typeof fetchLoginRequest>) {
   try {
@@ -11,9 +12,10 @@ function* fetchLoginSaga({ payload }: ReturnType<typeof fetchLoginRequest>) {
 
     if (login.status === 200) {
       document.cookie = login.data.SessionId;
-      yield put(fetchLoginSuccess({
+      yield put(fetchLoginSuccess());
+      yield put(fetchUserSuccess({
         username: payload.username,
-        isModer: login.data.isAdmin,
+        isModer: login.data.isAdmin
       }));
     }
   } catch (error: any) {

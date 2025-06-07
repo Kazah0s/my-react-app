@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Advertisement from './advertisement';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Store/store';
 import { AdvState } from '../../features/advButton/slice';
 import { fetchAdvGetRequest } from '../../pages/mainPage/advSlice';
+import Advertisement from '@/features/signup/advertisement';
 
 function AdvBlock() {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function AdvBlock() {
 
     useEffect(() => {
         dispatch(fetchAdvGetRequest(page))
-      }, [page, dispatch]);
+    }, [page, dispatch]);
 
     const safeAds = Array.isArray(ads) ? ads : [];
     const myADS = safeAds.filter(ad => ad.creatorName === currentUser.username);
