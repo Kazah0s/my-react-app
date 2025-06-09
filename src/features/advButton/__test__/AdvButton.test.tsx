@@ -1,102 +1,104 @@
-// import React from 'react';
-// import AdvButton from '../advButton';
+import React from 'react';
+import AdvButton from '../advButton';
 
-// import { render, screen, fireEvent } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-// import { Provider } from 'react-redux';
-// import { store } from '../../../app/Store/store';
+import { Provider } from 'react-redux';
+import { store } from '../../../app/Store/store';
 
 
-// describe('AdvButton Component', () => {
-//   beforeEach(() => {
-//     jest.clearAllMocks();
-//   });
+describe('AdvButton Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-//   const renderWithRedux = () => {
-//     return render(
-//       <Provider store={store}>
-//         <AdvButton />
-//       </Provider>
-//     );
-//   };
+  const renderWithRedux = () => {
+    return render(
+      <Provider store={store}>
+        <AdvButton />
+      </Provider>
+    );
+  };
 
-//   it('рендерит кнопку "Создать объявление"', () => {
-//     renderWithRedux();
-//     expect(screen.getByText(/Создать объявление/i)).toBeInTheDocument();
-//   });
+  it('рендерит кнопку "Создать объявление"', () => {
+    renderWithRedux();
+    expect(screen.getByText(/Создать объявление/i)).toBeInTheDocument();
+  });
 
-//   it('открывает модальное окно при клике', async () => {
-//     renderWithRedux();
-//     const button = screen.getByText(/Создать объявление/i);
-//     await userEvent.click(button);
-//     expect(screen.getByText(/Новое объявление/i)).toBeInTheDocument();
-//   });
-//   it('закрывает модальное окно при клике на крестик', async () => {
-//     renderWithRedux();
-//     const openButton = screen.getByText(/Создать объявление/i);
-//     await userEvent.click(openButton);
+  it('открывает модальное окно при клике', async () => {
+    renderWithRedux();
+    const button = screen.getByText(/Создать объявление/i);
+    await userEvent.click(button);
+    expect(screen.getByText(/Новое объявление/i)).toBeInTheDocument();
+  });
 
-//     const closeButton = screen.getByLabelText(/Закрыть модальное окно/i);
-//     await userEvent.click(closeButton);
+  // it('закрывает модальное окно при клике на крестик', async () => {
+  //   renderWithRedux();
+  //   const openButton = screen.getByText(/Создать объявление/i);
+  //   await userEvent.click(openButton);
 
-//     expect(screen.queryByText(/Новое объявление/i)).not.toBeInTheDocument();
-//   });
+  //   const closeButton = screen.getByLabelText(/Закрыть модальное окно/i);
+  //   await userEvent.click(closeButton);
 
-//   it('закрывает модальное окно при нажатии Escape', async () => {
-//     renderWithRedux();
-//     const openButton = screen.getByText(/Создать объявление/i);
-//     await userEvent.click(openButton);
+  //   expect(screen.queryByText(/Новое объявление/i)).not.toBeInTheDocument();
+  // });
 
-//     await userEvent.keyboard('{Escape}');
+  // it('закрывает модальное окно при нажатии Escape', async () => {
+  //   renderWithRedux();
+  //   const openButton = screen.getByText(/Создать объявление/i);
+  //   await userEvent.click(openButton);
 
-//     expect(screen.queryByText(/Новое объявление/i)).not.toBeInTheDocument();
-//   });
+  //   await userEvent.keyboard('{Escape}');
 
-//   it('ограничивает ввод описания до 250 символов', async () => {
-//     renderWithRedux();
-//     const openButton = screen.getByText(/Создать объявление/i);
-//     await userEvent.click(openButton);
+  //   expect(screen.queryByText(/Новое объявление/i)).not.toBeInTheDocument();
+  // });
 
-//     const descriptionInput = screen.getByLabelText(/Описание/i);
-//     const counter = screen.getByText(/0\/250/i);
+  it('ограничивает ввод описания до 250 символов', async () => {
+    renderWithRedux();
+    const openButton = screen.getByText(/Создать объявление/i);
+    await userEvent.click(openButton);
 
-//     await userEvent.type(descriptionInput, 'a'.repeat(250));
-//     expect(counter).toHaveTextContent('250/250');
-//   });
+    const descriptionInput = screen.getByLabelText(/Описание/i);
+    const counter = screen.getByText(/0\/250/i);
 
-//   it('вызывает dispatch при отправке формы', async () => {
-//     const useDispatchSpy = jest.spyOn(require('react-redux'), 'useDispatch');
-//     const mockDispatch = jest.fn();
-//     useDispatchSpy.mockReturnValue(mockDispatch);
+    await userEvent.type(descriptionInput, 'a'.repeat(250));
+    expect(counter).toHaveTextContent('250/250');
+  });
 
-//     renderWithRedux();
+  // it('вызывает dispatch при отправке формы', async () => {
+  //   const useDispatchSpy = jest.spyOn(require('react-redux'), 'useDispatch');
+  //   const mockDispatch = jest.fn();
+  //   useDispatchSpy.mockReturnValue(mockDispatch);
 
-//     const openButton = screen.getByText(/Создать объявление/i);
-//     await userEvent.click(openButton);
+  //   renderWithRedux();
 
-//     const titleInput = screen.getByLabelText(/Тема/i);
-//     const descriptionInput = screen.getByLabelText(/Описание/i);
-//     const dateInput = screen.getByLabelText(/Дата проведения/i);
-//     const imageInput = screen.getByLabelText(/Изображение \(URL\)/i);
+  //   const openButton = screen.getByText(/Создать объявление/i);
+  //   await userEvent.click(openButton);
 
-//     await userEvent.type(titleInput, 'Test Title');
-//     await userEvent.type(descriptionInput, 'Test Description');
-//     await userEvent.type(dateInput, '2025-01-01');
-//     await userEvent.type(imageInput, 'https://example.com/image.jpg');
+  //   const titleInput = screen.getByLabelText(/Тема/i);
+  //   const descriptionInput = screen.getByLabelText(/Описание/i);
+  //   const dateInput = screen.getByLabelText(/Дата проведения/i);
+  //   const imageInput = screen.getByLabelText(/Изображение \(URL\)/i);
 
-//     const submitButton = screen.getByText(/Опубликовать/i);
-//     await userEvent.click(submitButton);
+  //   await userEvent.type(titleInput, 'Test Title');
+  //   await userEvent.type(descriptionInput, 'Test Description');
+  //   await userEvent.type(dateInput, '2025-01-01');
+  //   await userEvent.type(imageInput, 'https://example.com/image.jpg');
 
-//     expect(mockDispatch).toHaveBeenCalled();
-//   });
+  //   const submitButton = screen.getByText(/Опубликовать/i);
+  //   await userEvent.click(submitButton);
 
-//   it('snapshot соответствует текущему UI', () => {
-//     const { container } = render(
-//       <Provider store={store}>
-//         <AdvButton />
-//       </Provider>
-//     );
-//     expect(container).toMatchSnapshot();
-//   });
-// });
+  //   expect(mockDispatch).toHaveBeenCalled();
+  // });
+
+  it('snapshot соответствует текущему UI', () => {
+    const { container } = render(
+      <Provider store={store}>
+        <AdvButton />
+      </Provider>
+    );
+    expect(container).toMatchSnapshot();
+  });
+});

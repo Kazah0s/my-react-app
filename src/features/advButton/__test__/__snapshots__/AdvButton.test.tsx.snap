@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvButton Component snapshot соответствует текущему UI 1`] = `
+<div>
+  <div
+    class="adv-container"
+  >
+    <button
+      class="adv-trigger-button"
+    >
+      Создать объявление
+    </button>
+  </div>
+</div>
+`;
