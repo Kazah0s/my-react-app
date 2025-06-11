@@ -12,7 +12,7 @@ interface AdvertisementProps {
 }
 const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const {
-        // eventId = "",
+        eventId = "",
         creatorName = "",
         title = "",
         description = "",
