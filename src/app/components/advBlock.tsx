@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Store/store';
 import { AdvState } from '../../features/advButton/slice';
 import { fetchAdvGetRequest } from '../../pages/mainPage/advSlice';
-import Advertisement from '@/features/signup/advertisement';
+import Advertisement from '../../features/signup/advertisement';
+
 
 function AdvBlock() {
     const dispatch = useDispatch();

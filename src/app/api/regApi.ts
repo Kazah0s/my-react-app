@@ -45,10 +45,8 @@ export const fetchLoginApi = async (regData: RegisterRawData): Promise<LoginResp
   const response = await apiInstance.post('/auth/login', regData);
   if (!response.data) throw new Error('Failed to login');
 
-  const { accessToken, isAdmin } = response.data;
-
-  // Сохраняем токен в localStorage
+  const { accessToken} = response.data;
   localStorage.setItem('accessToken', accessToken);
 
-  return { accessToken, isAdmin };
+  return { accessToken};
 };

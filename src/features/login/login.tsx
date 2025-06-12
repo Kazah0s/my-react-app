@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRegisterRequest } from '../register/slice';
+import { fetchLoginRequest } from '../login/slice';
 import { RootState } from '../../app/Store/store';
 // import Login from '../app/components/login';
 
@@ -20,7 +20,7 @@ const Login: React.FC = () => {
       username: username,
       password: password
     };
-    dispatch(fetchRegisterRequest(registerData));
+    dispatch(fetchLoginRequest(registerData));
   }
 
   const handleCloseModal = () => {
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
               &times;
             </button>
 
-            <h2 className="registration-title">Регистрация</h2>
+            <h2 className="registration-title">Авторизация</h2>
 
             <form onSubmit={handleButtonClick} className="registration-form">
               <div className="registration-form-group">

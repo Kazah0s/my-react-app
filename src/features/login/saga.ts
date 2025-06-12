@@ -2,7 +2,7 @@ import { takeEvery, call, put, take } from 'redux-saga/effects';
 import { fetchLoginSuccess, fetchLoginFailure, fetchLoginRequest } from './slice';
 import { fetchLoginApi } from '../../app/api/regApi';
 import { Axios, AxiosResponse } from 'axios';
-import { fetchUserSuccess } from '@/pages/mainPage/sliceLog';
+import { fetchUserSuccess } from '../../pages/mainPage/sliceLog';
 
 function* fetchLoginSaga({ payload }: ReturnType<typeof fetchLoginRequest>) {
   try {
