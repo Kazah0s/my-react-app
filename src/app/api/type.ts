@@ -3,5 +3,5 @@ export interface AdvState {
   title: string;
   description: string;
   eventDate: string;
-  imageLink?: string;
+  imageBase64?: string;
 }

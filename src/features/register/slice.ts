@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RegisterRawData, RegisterRecievedData } from '../../app/api/regApi';
+import { RegisterRawData } from '../../app/api/regApi';
 
 interface RegisterState {
   loading: boolean;
@@ -18,7 +18,7 @@ export const { actions, reducer } = createSlice({
     fetchRegisterRequest: (state, action: PayloadAction<RegisterRawData>) => {
       state.loading = true;
     },
-    fetchRegisterSuccess: (state, action: PayloadAction) => {
+    fetchRegisterSuccess: (state) => {
       state.loading = false;
     },
     fetchRegisterFailure: (state, action: PayloadAction<string>) => {

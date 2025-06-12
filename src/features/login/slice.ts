@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RegisterRawData, RegisterRecievedData } from '../../app/api/regApi';
+import { RegisterRawData } from '../../app/api/regApi';
 
 interface LoginState {
   loading: boolean;

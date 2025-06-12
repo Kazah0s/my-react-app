@@ -1,20 +1,14 @@
+// sliceLog.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
   username: string;
-  password: string,
-  moderator: boolean,
+  moderator: boolean;
   loading: boolean;
-}
-
-interface IUser {
-  username: string,
-  isModer: boolean
 }
 
 const initialState: UserState = {
   username: "",
-  password: "",
   moderator: false,
   loading: false,
 };
@@ -26,17 +20,18 @@ export const { actions, reducer } = createSlice({
     fetchUserRequest: (state) => {
       state.loading = true;
     },
-    fetchUserSuccess: (state, action: PayloadAction<IUser>) => {
-      state.username = action.payload.username
-      state.moderator = action.payload.isModer
-
-      state.loading = false
+    fetchUserSuccess: (state, action: PayloadAction<{ username: string; isModer: boolean }>) => {
+      state.username = action.payload.username;
+      state.moderator = action.payload.isModer;
+      state.loading = false;
+    },
+    fetchUserLogout: (state) => {
+      state.username = "";
+      state.moderator = false;
+      state.loading = false;
     }
   },
 });
 
-console.log(initialState)
-
-export const { fetchUserRequest, fetchUserSuccess } = actions;
+export const { fetchUserRequest, fetchUserSuccess, fetchUserLogout } = actions;
 // export default userSlice.reducer;
-

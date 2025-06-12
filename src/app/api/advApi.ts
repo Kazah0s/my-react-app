@@ -13,8 +13,7 @@ export type AdvensData = {
 export const fetchAdvApi = async (advData: AdvensData) => {
   const response = await apiInstance.post(
     '/event/create',
-    advData,
-    { withCredentials: true }
+    advData
   );
   if (!response.data) {
     throw new Error('Failed to fetch advensed');

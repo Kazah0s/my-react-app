@@ -4,7 +4,7 @@ import AdvButton from "../../features/advButton/advButton";
 const NavBar = () => {
     return (
         <div className="navBar">
-            <AdvButton/>
+            <AdvButton />
         </div>
     )
 }

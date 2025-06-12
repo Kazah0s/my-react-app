@@ -12,7 +12,7 @@ interface AdvertisementProps {
 }
 const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const {
-        eventId = "",
+        // eventId = "",
         creatorName = "",
         title = "",
         description = "",
@@ -58,7 +58,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
 
     const handleButtonClick = () => {
         const Advs = useSelector((state: RootState) => state.adv.data)
-        const eventid = Advs.find(a => a.title === title)?.eventId
+        const eventid = Advs.find((a: { title: string; }) => a.title === title)?.eventId
 
         if (eventid) { dispatch(fetchSignAdv(eventid)) }
     }

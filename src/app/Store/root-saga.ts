@@ -3,7 +3,6 @@ import { all } from 'redux-saga/effects';
 import { watchFetchRegister } from '../../features/register/saga';
 import { watchFetchAdv } from '../../features/advButton/saga'
 import { watchFetchAllAdv } from '../../pages/mainPage/advSaga';
-import { watchFetchLogin } from '../../features/login/saga';
 
 
 export default function* rootSaga() {
@@ -13,6 +12,5 @@ export default function* rootSaga() {
     watchFetchRegister(),
     watchFetchAdv(),
     watchFetchAllAdv(),
-    watchFetchLogin(),
   ]);
 }

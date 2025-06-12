@@ -1,10 +1,10 @@
 import { takeEvery, call, put, take } from 'redux-saga/effects';
 import { fetchRegisterSuccess, fetchRegisterFailure, fetchRegisterRequest } from './slice';
-import { fetchRegisterApi, RegisterRecievedData } from '../../app/api/regApi';
+import { fetchRegisterApi } from '../../app/api/regApi';
 import { Axios, AxiosResponse } from 'axios';
-import { fetchUserSuccess } from '../../pages/mainPage/sliceLog';
+import { fetchUserSuccess } from '@/pages/mainPage/sliceLog';
 
-function* fetchRegisterSaga({ payload }: ReturnType<typeof fetchRegisterRequest>) {
+export function* fetchRegisterSaga({ payload }: ReturnType<typeof fetchRegisterRequest>) {
   try {
     const register: AxiosResponse<{ isAdmin: boolean, SessionId: string }> = yield call(fetchRegisterApi, payload);
     yield localStorage.setItem("user", JSON.stringify(register));

@@ -26,7 +26,7 @@ const AdvButton = () => {
   };
 
   const [formData, setFormData] = useState<AdvensData>({
-    // eventId: 0,
+    eventId: 0,
     creatorName: currentUser.username,
     title: '',
     description: '',
