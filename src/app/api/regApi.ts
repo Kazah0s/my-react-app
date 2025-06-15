@@ -11,13 +11,7 @@
 //   data: boolean;
 // }
 
-export const fetchRegisterApi = async (regData: RegisterRawData) => {
-  const response = await apiInstance.post('/auth/register', regData);
-  if (!response.data) {
-    throw new Error('Failed to fetch regist');
-  }
-  return response;
-};
+
 
 // export const fetchLoginApi = async (regData: RegisterRawData) => {
 //   const response = await apiInstance.post('/auth/login', regData);
@@ -37,16 +31,25 @@ export type RegisterRawData = {
 };
 
 export type LoginResponse = {
-  accessToken: string;
+  username?:string;
+  token: string;
   isAdmin?: boolean;
 };
 
-export const fetchLoginApi = async (regData: RegisterRawData): Promise<LoginResponse> => {
+export const fetchRegisterApi = async (regData: RegisterRawData) => {
+  const response = await apiInstance.post('/auth/register', regData);
+  if (!response.data) {
+    throw new Error('Failed to fetch regist');
+  }
+  return response;
+};
+
+export const fetchLoginApi = async (regData: RegisterRawData): Promise<any> => {
   const response = await apiInstance.post('/auth/login', regData);
   if (!response.data) throw new Error('Failed to login');
 
-  const { accessToken} = response.data;
-  localStorage.setItem('accessToken', accessToken);
+  const { token } = response.data;
+  localStorage.setItem('token', token);
 
-  return { accessToken};
+  return response;
 };

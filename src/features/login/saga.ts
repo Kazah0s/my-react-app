@@ -6,10 +6,10 @@ import { fetchUserSuccess } from '../../pages/mainPage/sliceLog';
 
 function* fetchLoginSaga({ payload }: ReturnType<typeof fetchLoginRequest>) {
   try {
-    const login: AxiosResponse<{ isAdmin: boolean, SessionId: string }> = yield call(fetchLoginApi, payload);
+    const login: AxiosResponse<any> = yield call(fetchLoginApi, payload);
     yield localStorage.setItem('user', JSON.stringify({
       username: payload.username,
-      isModer: login.data.isAdmin
+      // isModer: login.data.isAdmin
     }));
     console.log(login.headers);
 
@@ -17,7 +17,7 @@ function* fetchLoginSaga({ payload }: ReturnType<typeof fetchLoginRequest>) {
       yield put(fetchLoginSuccess());
       yield put(fetchUserSuccess({
         username: payload.username,
-        isModer: login.data.isAdmin
+        // isModer: login.data.isAdmin
       }));
     }
   } catch (error: any) {

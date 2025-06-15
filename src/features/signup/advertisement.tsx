@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdvState, deleteAdRequest, updateAdRequest, updateStatusAdRequest } from '../../features/advButton/slice';
+import { AdvState, deleteAdRequest, updateAdvRequest, updateStatusAdRequest } from '../../features/advButton/slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { EditAdModal } from '../../features/EditAdModal';
@@ -12,7 +12,7 @@ interface AdvertisementProps {
 }
 const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const {
-        // eventId = "",
+        eventId = 0,
         creatorName = "",
         title = "",
         description = "",
@@ -21,8 +21,6 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
         // isModer = false,
     } = advObj;
 
-
-
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
 
@@ -30,37 +28,31 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const currentUser = useSelector((state: RootState) => state.user);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const isAuthor = advObj.creatorName === currentUser.username;
+    const isAuthor = creatorName === currentUser.username;
     const isAdmin = currentUser.moderator;
 
     const handleDelete = () => {
         if (window.confirm('Удалить объявление?')) {
-            dispatch(deleteAdRequest(advObj.title));
+            dispatch(deleteAdRequest(eventId));
         }
     };
+    
 
+    const [isApproved, setIsApproved] = useState(false);
 
-    const ApprovedModal = ({
-        ad,
-        onClose
-    }: {
-        ad: AdvState;
-        onClose: () => void
-    }) => {
-        const [approvedAd, setApprovedAd] = useState(ad)
+    const ApprovedModal = () => {
+        if (window.confirm('одобрить')) {
+            dispatch(updateStatusAdRequest({eventId: eventId, newStatus: "APPROVED"}));
 
-        const Approved = () => {
-            if (window.confirm('Удалить объявление?')) {
-                dispatch(updateStatusAdRequest(approvedAd));
-            }
+            setIsApproved(true)
         }
     }
+    
+    // const Advs = useSelector((state: RootState) => state.adv.data)
+    // const eventid = Advs.find((a: { title: string; }) => a.title === title)?.eventId
 
     const handleButtonClick = () => {
-        const Advs = useSelector((state: RootState) => state.adv.data)
-        const eventid = Advs.find((a: { title: string; }) => a.title === title)?.eventId
-
-        if (eventid) { dispatch(fetchSignAdv(eventid)) }
+        if (eventId) { dispatch(fetchSignAdv(eventId))}
     }
 
     return (
@@ -121,16 +113,16 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                                         Удалить
                                     </p>
                                 )}
-                                {(isAdmin && (
-                                    <button className='actionButton' onClick={() => ApprovedModal}>
-                                        Appruvd
-                                    </button>
+                                {((isAdmin && !isApproved) &&  (
+                                    <p className='actionButton' onClick={ApprovedModal}>
+                                        Одобрить
+                                    </p>
                                 )
                                 )}
-                                {(!isAdmin && (
-                                    <button className='actionButton' onClick={() => handleButtonClick}>
+                                {( (
+                                    <p className='actionButton' onClick={handleButtonClick}>
                                         Записаться
-                                    </button>
+                                    </p>
                                 )
                                 )}
                             </div>

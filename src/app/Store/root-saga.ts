@@ -4,6 +4,7 @@ import { watchFetchRegister } from '../../features/register/saga';
 import { watchFetchAdv } from '../../features/advButton/saga'
 import { watchFetchAllAdv } from '../../pages/mainPage/advSaga';
 import { watchFetchLogin } from '../../features/login/saga';
+import { watchFetchSing } from '../../features/signup/saga';
 
 
 export default function* rootSaga() {
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     watchFetchAdv(),
     watchFetchAllAdv(),
     watchFetchLogin(),
+    watchFetchSing(),
   ]);
 }

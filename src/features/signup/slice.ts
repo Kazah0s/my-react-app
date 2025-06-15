@@ -18,4 +18,4 @@ export const { actions, reducer } = createSlice({
   },
 });
 
-export const { fetchSignAdv, } = actions;
+export const { fetchSignAdv } = actions;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AdvState, fetchAdvRequest, updateAdRequest } from './slice';
+import { AdvState, fetchAdvRequest, updateAdvRequest } from './slice';
 import { RootState } from '../../app/Store/store';
 import { AdvensData } from '../../app/api/advApi';
 
@@ -25,10 +25,8 @@ const AdvButton = () => {
     }, 300);
   };
 
-  const [formData, setFormData] = useState<AdvensData>({
-    
+  const [formData, setFormData] = useState({
     eventId: 0,
-    creatorName: currentUser.username,
     title: '',
     description: '',
     eventDate: '',
@@ -40,6 +38,8 @@ const AdvButton = () => {
     e.preventDefault();
     const advData: AdvensData = {
       ...formData,
+    creatorName: currentUser.username,
+
     };
     dispatch(fetchAdvRequest(advData));
   };

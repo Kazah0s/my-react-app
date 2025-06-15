@@ -1,5 +1,5 @@
 import { takeEvery, call, put, take } from 'redux-saga/effects';
-import { fetchAdvSuccess, fetchAdvFailure, fetchAdvRequest, deleteAdRequest as deleteAdvRequest, updateAdRequest, updateStatusAdRequest as updateAdvRequest, updateStatusAdRequest } from './slice';
+import { fetchAdvSuccess, fetchAdvFailure, fetchAdvRequest, deleteAdRequest, updateAdvRequest, updateStatusAdRequest } from './slice';
 import { fetchAdvApi, AdvensData, deleteAdApi, updateStatusAdApi, updateAdApi } from '../../app/api/advApi';
 
 function* fetchAdvSaga({ payload }: ReturnType<typeof fetchAdvRequest>) {
@@ -29,7 +29,7 @@ function* updateAdvStatusSaga({ payload }: ReturnType<typeof updateStatusAdReque
   }
 }
 
-function* deleteAdvSaga({ payload }: ReturnType<typeof deleteAdvRequest>) {
+function* deleteAdvSaga({ payload }: ReturnType<typeof deleteAdRequest>) {
   try {
     yield call(deleteAdApi, payload);
     yield put(fetchAdvSuccess(payload));
@@ -42,5 +42,5 @@ export function* watchFetchAdv() {
   yield takeEvery(fetchAdvRequest.type, fetchAdvSaga);
   yield takeEvery(updateAdvRequest.type, updateAdvSaga);
   yield takeEvery(updateStatusAdRequest.type, updateAdvStatusSaga);
-  yield takeEvery(deleteAdvRequest.type, deleteAdvSaga);
+  yield takeEvery(deleteAdRequest.type, deleteAdvSaga);
 }

@@ -39,16 +39,16 @@ export const { actions, reducer } = createSlice({
     fetchAdvFailure: (state, action: PayloadAction<string>) => {
 
     },
-    deleteAdRequest: (state, action: PayloadAction<string>) => {
+    deleteAdRequest: (state, action: PayloadAction<number>) => {
 
     },
-    updateAdRequest: (state, action: PayloadAction<AdvensData>) => {
-      state.data.push(action.payload)
+    updateAdvRequest: (state, action: PayloadAction<AdvensData>) => {
+      state.loading=true
     },
-    updateStatusAdRequest: (state, action: PayloadAction<AdvensData>) => {
-      state.data.push(action.payload)
+    updateStatusAdRequest: (state, action: PayloadAction<{eventId: number, newStatus: string}>) => {
+
     },
   },
 });
 
-export const { fetchAdvRequest, fetchAdvSuccess, fetchAdvFailure, deleteAdRequest, updateAdRequest, updateStatusAdRequest } = actions;
+export const { fetchAdvRequest, fetchAdvSuccess, fetchAdvFailure, deleteAdRequest, updateAdvRequest, updateStatusAdRequest } = actions;

@@ -1,6 +1,6 @@
 import { takeEvery, call, put, take } from 'redux-saga/effects';
 import { fetchSignAdv } from './slice';
-import { fetchSignApi } from '@/app/api/signApi';
+import { fetchSignApi } from '../../app/api/signApi';
 
 function* fetchSignSaga({ payload }: ReturnType<typeof fetchSignAdv>) {
   try {
@@ -8,4 +8,8 @@ function* fetchSignSaga({ payload }: ReturnType<typeof fetchSignAdv>) {
   } catch (error: any) {
     console.log(error.message);
   }
+}
+
+export function* watchFetchSing(){
+  yield takeEvery(fetchSignAdv.type, fetchSignSaga)
 }

@@ -22,16 +22,16 @@ export const fetchAdvApi = async (advData: AdvensData) => {
 };
 
 export const updateAdApi = async (advData: AdvensData) => {
-  const response = await apiInstance.put('/event/update', advData, { withCredentials: true });
+  const response = await apiInstance.put('/event/update', advData);
   return response.data;
 };
 
-export const updateStatusAdApi = async (advData: AdvensData) => {
-  const response = await apiInstance.put('/event/update-status', advData, { withCredentials: true });
+export const updateStatusAdApi = async (statusEvent: {eventId: number, newStatus: string}) => {
+  const response = await apiInstance.patch('/event/update-status', statusEvent);
   return response.data;
 };
 
-export const deleteAdApi = async (title: string) => {
-  const response = await apiInstance.delete('/event/delete/{eventId}', { withCredentials: true });
+export const deleteAdApi = async (eventId: number) => {
+  const response = await apiInstance.delete(`/event/delete/${eventId}` );
   return response.data;
 };

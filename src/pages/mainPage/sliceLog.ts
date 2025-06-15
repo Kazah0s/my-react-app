@@ -20,9 +20,9 @@ export const { actions, reducer } = createSlice({
     fetchUserRequest: (state) => {
       state.loading = true;
     },
-    fetchUserSuccess: (state, action: PayloadAction<{ username: string; isModer: boolean }>) => {
+    fetchUserSuccess: (state, action: PayloadAction<{ username: string}>) => {
       state.username = action.payload.username;
-      state.moderator = action.payload.isModer;
+      // state.moderator = action.payload.isModer;
       state.loading = false;
     },
     fetchUserLogout: (state) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AdvState, updateAdRequest } from "./advButton/slice";
+import { AdvState, updateAdvRequest } from "./advButton/slice";
 
 
 
@@ -17,7 +17,7 @@ export const EditAdModal = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(updateAdRequest(editedAd));
+    dispatch(updateAdvRequest(editedAd));
     onClose();
   };
 
