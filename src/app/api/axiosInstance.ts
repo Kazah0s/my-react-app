@@ -1,7 +1,4 @@
-// axiosInstance.ts
 import axios from 'axios';
-import { error } from 'console';
-import { request } from 'http';
 import process from "process"
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -14,10 +11,9 @@ const axiosInstance = axios.create({
   }
 });
 
-// Добавляем токен ко всем запросам
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -25,23 +21,6 @@ axiosInstance.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
-
-
-
-axiosInstance.interceptors.request.use(request =>{
-  console.log('Start Request', request);
-  return request
-});
-
-axiosInstance.interceptors.request.use(response =>{
-  console.log('Response', response);
-  return response
-}, error=> {
- console.error("error", error);
- return Promise.reject(error)
-});
-
 
 export const apiInstance = axiosInstance;
 

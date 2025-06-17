@@ -8,8 +8,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  username: "",
-  moderator: false,
+  username: "Admin",
+  moderator: true,
   loading: false,
 };
 
@@ -20,9 +20,9 @@ export const { actions, reducer } = createSlice({
     fetchUserRequest: (state) => {
       state.loading = true;
     },
-    fetchUserSuccess: (state, action: PayloadAction<{ username: string}>) => {
+    fetchUserSuccess: (state, action: PayloadAction<{ username: string; isModer: boolean }>) => {
       state.username = action.payload.username;
-      // state.moderator = action.payload.isModer;
+      state.moderator = action.payload.isModer;
       state.loading = false;
     },
     fetchUserLogout: (state) => {

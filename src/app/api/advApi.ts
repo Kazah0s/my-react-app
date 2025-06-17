@@ -6,7 +6,9 @@ export type AdvensData = {
   title: string;
   description: string;
   eventDate: string;
-  imageLink: string | null;
+  imageLink: string;
+  maxParticipants: number | null;
+  participantsCount: number | string;
   // isModer: boolean;
 }
 
@@ -22,16 +24,16 @@ export const fetchAdvApi = async (advData: AdvensData) => {
 };
 
 export const updateAdApi = async (advData: AdvensData) => {
-  const response = await apiInstance.put('/event/update', advData);
+  const response = await apiInstance.put('/event/update', advData, { withCredentials: true });
   return response.data;
 };
 
-export const updateStatusAdApi = async (statusEvent: {eventId: number, newStatus: string}) => {
-  const response = await apiInstance.patch('/event/update-status', statusEvent);
+export const updateStatusAdApi = async (advData: AdvensData) => {
+  const response = await apiInstance.put('/event/update-status', advData, { withCredentials: true });
   return response.data;
 };
 
-export const deleteAdApi = async (eventId: number) => {
-  const response = await apiInstance.delete(`/event/delete/${eventId}` );
+export const deleteAdApi = async (title: string) => {
+  const response = await apiInstance.delete('/event/delete/{eventId}', { withCredentials: true });
   return response.data;
 };
