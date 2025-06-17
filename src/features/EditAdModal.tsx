@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AdvState, updateAdvRequest } from "./advButton/slice";
+import { updateAdRequest } from "./advButton/slice";
+import { AdvState } from '@/pages/mainPage/advSlice';
 
 
 
@@ -17,40 +18,72 @@ export const EditAdModal = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(updateAdvRequest(editedAd));
+    dispatch(updateAdRequest(editedAd));
     onClose();
   };
-
 
   return (
     <div className="adv-overlay">
       <div className="adv-modal">
-        <button onClick={onClose}>&times;</button>
+
         <h2>Редактировать объявление</h2>
         <form onSubmit={handleSubmit}>
+          <div className="adv-form-group">
+            <input
+              className="adv-input"
+              value={editedAd.title}
+              onChange={(e) => setEditedAd({ ...editedAd, title: e.target.value })}
+            />
+          </div>
 
-          <input
-            value={editedAd.title}
-            onChange={(e) => setEditedAd({ ...editedAd, title: e.target.value })}
-          />
+          <div className="adv-form-group">
+            <input
+              className="adv-input"
+              value={editedAd.description}
+              onChange={(e) => setEditedAd({ ...editedAd, description: e.target.value })}
+            />
+          </div>
 
-          <input
-            value={editedAd.description}
-            onChange={(e) => setEditedAd({ ...editedAd, description: e.target.value })}
-          />
+          <div className="adv-form-group">
+            <input
+              className="adv-input"
+              value={editedAd.eventDate}
+              onChange={(e) => setEditedAd({ ...editedAd, eventDate: e.target.value })}
+            />
+          </div>
 
-          <input
-            value={editedAd.eventDate}
-            onChange={(e) => setEditedAd({ ...editedAd, eventDate: e.target.value })}
-          />
+          <div className="adv-form-group">
+            <input
+              className="adv-input"
+              value={editedAd.imageLink}
+              onChange={(e) => setEditedAd({ ...editedAd, imageLink: e.target.value })}
+            />
+          </div>
 
-          <input
-            // value={editedAd.imageLink}
-            onChange={(e) => setEditedAd({ ...editedAd, imageLink: e.target.value })}
-          />
+          <div className="adv-form-group">
+            <input
+              className="adv-input"
+              value={editedAd.maxParticipants!}
+              onChange={(e) => setEditedAd({ ...editedAd, maxParticipants: parseInt(e.target.value) })}
+            />
+          </div>
 
 
-          <button type="submit">Сохранить</button>
+          <div className="adv-actions">
+            <button
+              type="button"
+              className="adv-cancel-button"
+              onClick={onClose}
+            >
+              Закрыть
+            </button>
+            <button
+              type="submit"
+              className="adv-submit-button"
+            >
+              Отредактировать
+            </button>
+          </div>
         </form>
       </div>
     </div>

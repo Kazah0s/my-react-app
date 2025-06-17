@@ -15,7 +15,7 @@ export function* fetchRegisterSaga({ payload }: ReturnType<typeof fetchRegisterR
       yield put(fetchRegisterSuccess());
       yield put(fetchUserSuccess({
         username: payload.username,
-        // isModer: register.data.isAdmin
+        isModer: register.data.isAdmin
       }));
     }
   } catch (error: any) {

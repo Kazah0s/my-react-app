@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AdvState, fetchAdvRequest, updateAdvRequest } from './slice';
+import { fetchAdvRequest, updateAdRequest } from './slice';
 import { RootState } from '../../app/Store/store';
 import { AdvensData } from '../../app/api/advApi';
+import { parseSync } from '@babel/core';
 
 const AdvButton = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState<boolean>(false);
-  // const [advState, setAdvState] = useState({
-  //   creator: "",
-  //   title: "",
-  //   description: "",
-  //   date: "",
-  //   image: "",
-  // });
+
   const currentUser = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
@@ -25,21 +20,22 @@ const AdvButton = () => {
     }, 300);
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<AdvensData>({
     eventId: 0,
+    creatorName: currentUser.username,
     title: '',
     description: '',
     eventDate: '',
     imageLink: '',
-    // isModer: currentUser.moderator
+    maxParticipants: 0,
+    participantsCount: "Неограничено",
+    // isModer: currentUser.moderato
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const advData: AdvensData = {
       ...formData,
-    creatorName: currentUser.username,
-
     };
     dispatch(fetchAdvRequest(advData));
   };
@@ -126,6 +122,7 @@ const AdvButton = () => {
                   type="date"
                   id="date"
                   value={formData.eventDate}
+                  required
                   onChange={(e) => setFormData(prev => ({ ...prev, eventDate: e.target.value }))}
                   className="adv-input"
                 />
@@ -137,13 +134,29 @@ const AdvButton = () => {
                   type="url"
                   id="image"
                   placeholder="https://example.com/image.jpg"
-                  // value={formData.imageLink}
+                  value={formData.imageLink}
                   onChange={(e) => setFormData(prev => ({ ...prev, imageLink: e.target.value }))}
                   className="adv-input"
                 />
               </div>
 
+              <div className="adv-form-group">
+                <label htmlFor="maxParticipants" className="adv-label">Количество людей </label>
+                <input
+                  type="string"
+                  id="maxParticipants"
+                  placeholder="оставьте пустым для неограниченного количества"
+                  value={formData.maxParticipants!}
+                  onChange={(e) => setFormData(prev => ({ ...prev, maxParticipants: parseInt(e.target.value) }))}
+                  className="adv-input"
+                />
+              </div>
+
+              <div className="adv-actions"></div>
+
               <div className="adv-actions">
+
+
                 <button
                   type="button"
                   className="adv-cancel-button"

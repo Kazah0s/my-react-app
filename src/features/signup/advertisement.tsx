@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { AdvState, deleteAdRequest, updateAdvRequest, updateStatusAdRequest } from '../../features/advButton/slice';
+import { deleteAdRequest, updateAdRequest, updateStatusAdRequest } from '../../features/advButton/slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { EditAdModal } from '../../features/EditAdModal';
 import { RootState } from '@/app/Store/store';
 import { fetchSignAdv } from './slice';
-import { Root } from 'react-dom/client';
+import { AdvState } from '../../pages/mainPage/advSlice';
 
 interface AdvertisementProps {
     advObj: AdvState;
@@ -18,8 +18,12 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
         description = "",
         eventDate = "",
         imageLink = "",
+        maxParticipants = null,
+        participantsCount = null
         // isModer = false,
     } = advObj;
+
+
 
     const [isExpanded, setIsExpanded] = useState(false);
     const shortDescription = description.length > 100 ? `${description.substring(0, 100)}...` : description;
@@ -28,42 +32,48 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
     const currentUser = useSelector((state: RootState) => state.user);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const isAuthor = creatorName === currentUser.username;
+    const isAuthor = advObj.creatorName === currentUser.username;
     const isAdmin = currentUser.moderator;
 
     const handleDelete = () => {
         if (window.confirm('Удалить объявление?')) {
-            dispatch(deleteAdRequest(eventId));
+            dispatch(deleteAdRequest(advObj.title));
         }
     };
-    
 
-    const [isApproved, setIsApproved] = useState(false);
 
-    const ApprovedModal = () => {
-        if (window.confirm('одобрить')) {
-            dispatch(updateStatusAdRequest({eventId: eventId, newStatus: "APPROVED"}));
+    const ApprovedModal = ({
+        ad,
+        onClose
+    }: {
+        ad: AdvState;
+        onClose: () => void
+    }) => {
+        const [approvedAd, setApprovedAd] = useState(ad)
 
-            setIsApproved(true)
+        const Approved = () => {
+            if (window.confirm('Удалить объявление?')) {
+                dispatch(updateStatusAdRequest(approvedAd!));
+            }
         }
     }
-    
-    // const Advs = useSelector((state: RootState) => state.adv.data)
-    // const eventid = Advs.find((a: { title: string; }) => a.title === title)?.eventId
 
     const handleButtonClick = () => {
-        if (eventId) { dispatch(fetchSignAdv(eventId))}
+        const Advs = useSelector((state: RootState) => state.adv.data)
+        const eventid = Advs.find((a: { title: string; }) => a.title === title)?.eventId
+
+        if (eventid) { dispatch(fetchSignAdv(eventid)) }
     }
 
     return (
         <>
             <div
                 className={
-                    // isModer == false ? "ann-card-notModer" : 
+                    // isAdmin == false ? "ann-card-notModer" :
                     "ann-card"}
                 onClick={() => setIsExpanded(true)}
             >
-                <h3 className="ann-theme">{title} {creatorName}</h3>
+                <h3 className="ann-theme">{title} {creatorName} </h3>
                 {imageLink && (
                     <div className="ann-image-container">
                         <img
@@ -75,6 +85,7 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                 )}
                 <p className="ann-description">{shortDescription}</p>
                 <div className="ann-date">Дата: {eventDate}</div>
+                <p>Участников:{participantsCount}/{maxParticipants}</p>
             </div>
 
             {isExpanded && (
@@ -102,25 +113,27 @@ const Advertisement: React.FC<AdvertisementProps> = ({ advObj }) => {
                             <p>Дата проведения: {eventDate}</p>
 
 
+
+
                             <div className='subButtons'>
-                                {(
+                                {(isAuthor && (
                                     <p className='actionButton' onClick={() => setIsEditModalOpen(true)}>
                                         Редактировать
                                     </p>
-                                )}
+                                ))}
                                 {(isAuthor || isAdmin) && (
                                     <p className='actionButton' onClick={handleDelete}>
                                         Удалить
                                     </p>
                                 )}
-                                {((isAdmin && !isApproved) &&  (
-                                    <p className='actionButton' onClick={ApprovedModal}>
+                                {((isAdmin) && (
+                                    <p className='actionButton' onClick={() => ApprovedModal}>
                                         Одобрить
                                     </p>
                                 )
                                 )}
-                                {( (
-                                    <p className='actionButton' onClick={handleButtonClick}>
+                                {(!isAdmin && (
+                                    <p className='actionButton' onClick={() => handleButtonClick}>
                                         Записаться
                                     </p>
                                 )
